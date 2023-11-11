@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header id="header">
+      <button id="music">Music</button>
+      <h1>THE MEMORY GAME</h1>
+      <button id="dark">Dark</button>
+    </header>
+    <main id="main">
+      <div id="logo"><img src="" alt="logo" /></div>
+      <div id="welcome">Welcome screen text and introduction</div>
+
+      <div id="choose">
+        <p class="size">Size</p>
+        <p class="difficulty">Difficulty</p>
+        <p class="time">Time</p>
+      </div>
+      <div id="choices">
+        <div class="size">
+          <select name="size" id="size" class="size">
+            <option value="4 X 4">Hard (4 X 4)</option>
+            <option value="3 X 3" selected>Medium (3 X 3)</option>
+            <option value="2 X 2">Easy (2 X 2)</option>
+          </select>
+        </div>
+        <div class="difficulty">
+          <select name="difficulty" id="difficulty" class="difficulty">
+            <option value="hard">Hard (5 mistakes)</option>
+            <option value="med" selected>Medium (20 mistakes)</option>
+            <option value="easy">Easy (unlimited mistakes)</option>
+          </select>
+        </div>
+        <div class="time">
+          <select name="time" id="time" class="time">
+            <option value="2-min">Hard (2 Minutes)</option>
+            <option value="10-min" selected>Medium (10 Minutes)</option>
+            <option value="no-time">Easy (No time limit)</option>
+          </select>
+        </div>
+      </div>
+    </main>
+    <footer id="footer"></footer>
+    <script src="main.js"></script>
+  </body>
+</html>
