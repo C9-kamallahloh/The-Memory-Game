@@ -24,11 +24,13 @@ body {
 #welcome {
   grid-area: 1 / 2 / 2 / 5;
 }
-/* #choices {
+/* .choices {
   grid-area: 2 / 2 / 3 / 5;
+
 } */
-#size {
+#number {
   grid-area: 2 / 2 / 3 / 3;
+
 }
 #difficulty {
   grid-area: 2 / 3 / 3 / 4;
@@ -48,6 +50,8 @@ body {
 }
 #game {
   grid-area: 1 / 2 / 3 / 3;
+  display: flex;
+  flex-wrap: wrap;
 }
 #hint {
   grid-area: 1 / 3 / 2 / 4;
