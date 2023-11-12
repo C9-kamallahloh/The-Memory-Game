@@ -3,11 +3,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  margin: 15px;
+  padding: 5px;
+}
 #test {
   color: red;
 }
 #header {
   display: flex;
+  justify-content: space-between;
 }
 #main {
   display: grid;
@@ -30,4 +35,9 @@
 }
 #time {
   grid-area: 2 / 4 / 3 / 5;
+}
+
+#footer {
+  display: flex;
+  justify-content: space-between;
 }
