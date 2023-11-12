@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header id="header">
+      <button id="music">Music</button>
+      <h1>THE MEMORY GAME</h1>
+      <button id="dark">Dark</button>
+    </header>
+    <main id="main-welcome">
+      <div id="logo"><img src="" alt="logo" /></div>
+      <div id="welcome"> <h4>Welcome to The Memory Game</h4><br>
+        How to Play: <br>
+        The game starts with all the cards face-down. Start by turning over two cards. If the two cards have the same picture, the cards stays face-up, otherwise the cards turns face-down again.
+        You will win if all the cards faces-up. <br>
+        At first choose the number of cards to start the game with. The difficulty since you need to finish the game with less mistakes than what you chooses. And the time limit to finish the game within.
+      </div>
+<!--       <div id="choices"> -->
+        <div id="number" class="number">
+          <label for="number">number of cards:</label><br>
+          <select name="number"  class="number">
+            <option value="24-cards">Hard (24 cards)</option>
+            <option value="12-cards" selected>Medium (12 cards)</option>
+            <option value="6-cards">Easy (6 cards)</option>
+          </select>
+        </div>
+        <div id="difficulty" class="difficulty">
+          <label for="difficulty">Difficulty:</label><br>
+          <select name="difficulty"  class="difficulty">
+            <option value="hard">Hard (5 mistakes)</option>
+            <option value="med" selected>Medium (20 mistakes)</option>
+            <option value="easy">Easy (unlimited mistakes)</option>
+          </select>
+        </div>
+        <div id="time" class="time">
+          <label for="time">Time:</label><br>
+          <select name="time"  class="time">
+            <option value="2-min">Hard (2 Minutes)</option>
+            <option value="10-min" selected>Medium (10 Minutes)</option>
+            <option value="no-time">Easy (No time limit)</option>
+          </select>
+        </div>
+<!--       </div> -->
+    </main>
+    <footer id="footer">
+      <h4>MERAKI_Academy_Project_1 - B06_Kamal Lahloh - Memory card</h4>
+      <button>Play Now</button>
+    </footer>
+    <script src="main.js"></script>
+  </body>
+</html>
