@@ -90,15 +90,18 @@ const resetButton = document.querySelector("#reset-button");
 } */
 
 for (let i = 0; i < images.length; i++) {
-  const image = document.createElement("div");
-  image.classList.add = "image";
+  const imageDiv = document.createElement("div");
+  imageDiv.className = "image-div";
+
+  const image = document.createElement("img");
+  image.src = images[i].src;
   image.id = images[i].id;
-  image.style.backgroundImage.url = images[i].src;
-  console.log(image.style.backgroundImage.url);
 
+  const overlay = document.createElement("img");
+  overlay.id = i;
+  overlay.className = "overlay";
+  overlay.src = "Media/meraki-logo.jpg";
 
-  // image.width= "100%";
-  // image.backgroundPosition = "center";
-  // image.backgroundSize = "cover";
-  // image.backgroundRepeat = "no-repeat";
-} 
+  imageDiv.append(image, overlay);
+  game.append(imageDiv);
+}
