@@ -1,7 +1,15 @@
 /* 
 Main features:
+
 #shuffle
-#reset
+
+# Cards will appear for period of time (Ex.10 seconds) then it will flip to the other side.
+
+(DONE) # User will choose two cards.
+
+(DONE) # Cards will be checked Correct , Wrong.
+
+# reset // When finish, user will see a screen with the result on it with a Play Again button.
 
 */
 
@@ -74,12 +82,12 @@ const resetButton = document.querySelector("#reset-button");
 const theGame = () => {
   let userClick;
   let firstImage;
-  let pairsNumber = /* images.length */ 6 / 2;
+  let pairsNumber = images.length / 2;
   let correctPairsCounter = 0;
   let wrongAttempts = /* user defined */ 5;
   let wrongPairsCounter = 0;
 
-  for (let i = 0; i < 6 /* images.length */; i++) {
+  for (let i = 0; i < images.length; i++) {
     const imageDiv = document.createElement("div");
     imageDiv.className = "image-div";
 
@@ -126,3 +134,12 @@ const theGame = () => {
 };
 
 theGame();
+
+resetButton.addEventListener("click", (e) => {
+  for (let i = 0; i <  images.length ; i++) {
+    const imageDiv = document.querySelector(".image-div");
+    // const overlay = document.querySelector(".overlay")
+    game.removeChild(imageDiv);
+  }
+  theGame();
+});
