@@ -10,32 +10,31 @@ Extra features:
 */
 
 const images = [
-    { id: 1, src: "Media/01.jpg"},
-    { id: 1, src: "Media/01.jpg"},
-    { id: 2, src: "Media/02.jpg"},
-    { id: 2, src: "Media/02.jpg"},
-    { id: 3, src: "Media/03.jpg"},
-    { id: 3, src: "Media/03.jpg"},
-    { id: 4, src: "Media/04.jpg"},
-    { id: 4, src: "Media/04.jpg"},
-    { id: 5, src: "Media/05.jpg"},
-    { id: 5, src: "Media/05.jpg"},
-    { id: 6, src: "Media/06.jpg"},
-    { id: 6, src: "Media/06.jpg"},
-    { id: 7, src: "Media/07.jpg"},
-    { id: 7, src: "Media/07.jpg"},
-    { id: 8, src: "Media/08.jpg"},
-    { id: 8, src: "Media/08.jpg"},
-    { id: 9, src: "Media/09.jpg"},
-    { id: 9, src: "Media/09.jpg"},
-    { id: 10, src: "Media/10.jpg"},
-    { id: 10, src: "Media/10.jpg"},
-    { id: 11, src: "Media/11.jpg"},
-    { id: 11, src: "Media/11.jpg"},
-    { id: 12, src: "Media/12.jpg"},
-    { id: 12, src: "Media/12.jpg"},
-  ];
-
+  { id: 1, src: "Media/01.jpg" },
+  { id: 1, src: "Media/01.jpg" },
+  { id: 2, src: "Media/02.jpg" },
+  { id: 2, src: "Media/02.jpg" },
+  { id: 3, src: "Media/03.jpg" },
+  { id: 3, src: "Media/03.jpg" },
+  { id: 4, src: "Media/04.jpg" },
+  { id: 4, src: "Media/04.jpg" },
+  { id: 5, src: "Media/05.jpg" },
+  { id: 5, src: "Media/05.jpg" },
+  { id: 6, src: "Media/06.jpg" },
+  { id: 6, src: "Media/06.jpg" },
+  { id: 7, src: "Media/07.jpg" },
+  { id: 7, src: "Media/07.jpg" },
+  { id: 8, src: "Media/08.jpg" },
+  { id: 8, src: "Media/08.jpg" },
+  { id: 9, src: "Media/09.jpg" },
+  { id: 9, src: "Media/09.jpg" },
+  { id: 10, src: "Media/10.jpg" },
+  { id: 10, src: "Media/10.jpg" },
+  { id: 11, src: "Media/11.jpg" },
+  { id: 11, src: "Media/11.jpg" },
+  { id: 12, src: "Media/12.jpg" },
+  { id: 12, src: "Media/12.jpg" },
+];
 
 const body = document.querySelector("body");
 const header = document.querySelector("#header");
@@ -59,16 +58,47 @@ const hint = document.querySelector("#hint");
 const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 
-
 // todo // change the images.length to the specific number of images needed in the game.
-for (let i =0; i < images.length;i++) {
-  const image = document.createElement('img')
-  image.src = images[i].src
-  image.id = images[i].id
-  game.append(image)
-}
+/* for (let i = 0; i < images.length; i++) {
+  // const imageDiv = document.createElement("div");
+  // imageDiv.position = "relative";
+  // imageDiv.width = "100%";
+
+
+  const overlay = document.createElement("div");
+  overlay.classList.add = "overlay";
+  overlay.backgroundImage.url = "Media/meraki-logo.jpg";
+  overlay.id = i + 1;
+  overlay.width= "100%";
+  overlay.height= "100%";
+  overlay.backgroundColor = "rgba(0, 0, 0, 0.1)";
+
+  const image = document.createElement("div");
+  image.classList.add = "image";
+  image.width= "100%";
+  image.id = images[i].id;
+  image.backgroundImage.url = images[i].src;
+  console.log(image.backgroundImage.url);
+  image.backgroundPosition = "center";
+  image.backgroundSize = "cover";
+  image.backgroundRepeat = "no-repeat";
 
 
 
+  // image.append(overlay); 
+  game.append(image);
+} */
+
+for (let i = 0; i < images.length; i++) {
+  const image = document.createElement("div");
+  image.classList.add = "image";
+  image.id = images[i].id;
+  image.style.backgroundImage.url = images[i].src;
+  console.log(image.style.backgroundImage.url);
 
 
+  // image.width= "100%";
+  // image.backgroundPosition = "center";
+  // image.backgroundSize = "cover";
+  // image.backgroundRepeat = "no-repeat";
+} 
