@@ -59,37 +59,9 @@ const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 
 // todo // change the images.length to the specific number of images needed in the game.
-/* for (let i = 0; i < images.length; i++) {
-  // const imageDiv = document.createElement("div");
-  // imageDiv.position = "relative";
-  // imageDiv.width = "100%";
 
-
-  const overlay = document.createElement("div");
-  overlay.classList.add = "overlay";
-  overlay.backgroundImage.url = "Media/meraki-logo.jpg";
-  overlay.id = i + 1;
-  overlay.width= "100%";
-  overlay.height= "100%";
-  overlay.backgroundColor = "rgba(0, 0, 0, 0.1)";
-
-  const image = document.createElement("div");
-  image.classList.add = "image";
-  image.width= "100%";
-  image.id = images[i].id;
-  image.backgroundImage.url = images[i].src;
-  console.log(image.backgroundImage.url);
-  image.backgroundPosition = "center";
-  image.backgroundSize = "cover";
-  image.backgroundRepeat = "no-repeat";
-
-
-
-  // image.append(overlay); 
-  game.append(image);
-} */
-let firstClick;
-let SecondClick;
+let userClick;
+let firstImage;
 
 for (let i = 0; i < images.length; i++) {
   const imageDiv = document.createElement("div");
@@ -103,33 +75,28 @@ for (let i = 0; i < images.length; i++) {
 
   const image = document.createElement("img");
   image.src = images[i].src;
-  // image.id = images[i].id;
 
   overlay.addEventListener("click", (e) => {
     overlay.style.zIndex = -1;
-    if (firstClick === undefined) {
-    return firstClick = e.target.id; // overlay ID
+    if (userClick === undefined) {
+      firstImage = e.target; // overlay 1 tag
+      userClick = e.target.id; // overlay 1 ID
+    } else if (userClick !== e.target.id) {
+      console.log("Wrong");
+      setTimeout(() => {
+        overlay.style.zIndex = 1;
+        firstImage.style.zIndex = 1;
+        userClick = undefined
+        firstImage = undefined
+      }, 1000);
+    } else if (userClick === e.target.id) {
+      console.log("correct");
+      userClick = undefined;
+      firstImage = undefined
+      //! Block click on correct image pair.
     }
-    if (firstClick !== e.target.id) {
-      console.log( "Wrong");
-      overlay.style.zIndex = 1;
-    }
-    if (firstClick === e.target.id) {
-      console.log( "correct");
-      firstClick = undefined
-      SecondClick = undefined
-    }
-
-  });
-
-  image.addEventListener("click", (e) => {
-    overlay.style.zIndex = 1;
   });
 
   imageDiv.append(image, overlay);
   game.append(imageDiv);
 }
-
-/* image.addEventListener ('click', (e) => {
-    overlay.style.zIndex = -1
-}) */
