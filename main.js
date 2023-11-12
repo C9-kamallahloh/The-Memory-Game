@@ -60,5 +60,15 @@ const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 
 
+// todo // change the images.length to the specific number of images needed in the game.
+for (let i =0; i < images.length;i++) {
+  const image = document.createElement('img')
+  image.src = images[i].src
+  image.id = images[i].id
+  game.append(image)
+}
+
+
+
 
 
