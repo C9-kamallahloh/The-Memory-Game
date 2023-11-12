@@ -1,7 +1,14 @@
 /* 
+Main features:
+#shuffle
+#reset
+
+*/
+
+/* 
 Extra features:
 # Choose the time limit and show the timer.
-# Choose difficulty 2x2 3x3 4x4 ...
+# Choose difficulty Number of Pairs ...
 # Show the pics for 10s or start the game immediately button.
 # Play music and stop button.
 # Reset button and shuffle again.
@@ -9,6 +16,10 @@ Extra features:
 # Dark theme.
 */
 
+/* 
+Bugs:
+# prevent clicks until setTimeout executed.
+*/
 const images = [
   { id: 1, src: "Media/01.jpg" },
   { id: 1, src: "Media/01.jpg" },
@@ -60,43 +71,58 @@ const resetButton = document.querySelector("#reset-button");
 
 // todo // change the images.length to the specific number of images needed in the game.
 
-let userClick;
-let firstImage;
+const theGame = () => {
+  let userClick;
+  let firstImage;
+  let pairsNumber = /* images.length */ 6 / 2;
+  let correctPairsCounter = 0;
+  let wrongAttempts = /* user defined */ 5;
+  let wrongPairsCounter = 0;
 
-for (let i = 0; i < images.length; i++) {
-  const imageDiv = document.createElement("div");
-  imageDiv.className = "image-div";
+  for (let i = 0; i < 6 /* images.length */; i++) {
+    const imageDiv = document.createElement("div");
+    imageDiv.className = "image-div";
 
-  const overlay = document.createElement("img");
-  overlay.id = images[i].id;
-  overlay.className = "overlay";
-  overlay.src = "Media/meraki-logo.jpg";
-  overlay.style.zIndex = 1;
+    const overlay = document.createElement("img");
+    overlay.id = images[i].id;
+    overlay.className = "overlay";
+    overlay.src = "Media/meraki-logo.jpg";
+    overlay.style.zIndex = 1;
 
-  const image = document.createElement("img");
-  image.src = images[i].src;
+    const image = document.createElement("img");
+    image.src = images[i].src;
 
-  overlay.addEventListener("click", (e) => {
-    overlay.style.zIndex = -1;
-    if (userClick === undefined) {
-      firstImage = e.target; // overlay 1 tag
-      userClick = e.target.id; // overlay 1 ID
-    } else if (userClick !== e.target.id) {
-      console.log("Wrong");
-      setTimeout(() => {
-        overlay.style.zIndex = 1;
-        firstImage.style.zIndex = 1;
-        userClick = undefined
-        firstImage = undefined
-      }, 1000);
-    } else if (userClick === e.target.id) {
-      console.log("correct");
-      userClick = undefined;
-      firstImage = undefined
-      //! Block click on correct image pair.
-    }
-  });
+    overlay.addEventListener("click", (e) => {
+      overlay.style.zIndex = -1;
+      if (userClick === undefined) {
+        firstImage = e.target; // overlay 1 tag
+        userClick = e.target.id; // overlay 1 ID
+      } else if (userClick !== e.target.id) {
+        wrongPairsCounter++;
+        console.log("Wrong:", wrongPairsCounter);
+        if (wrongPairsCounter === wrongAttempts) {
+          console.log("LOSS");
+        }
+        //! prevent clicks until setTimeout executed.
+        setTimeout(() => {
+          overlay.style.zIndex = 1;
+          firstImage.style.zIndex = 1;
+          userClick = undefined;
+          firstImage = undefined;
+        }, 1000);
+      } else if (userClick === e.target.id) {
+        console.log("correct");
+        correctPairsCounter++;
+        userClick = undefined;
+        firstImage = undefined;
+        if (correctPairsCounter === pairsNumber) {
+          console.log("WIN");
+        }
+      }
+    });
+    imageDiv.append(image, overlay);
+    game.append(imageDiv);
+  }
+};
 
-  imageDiv.append(image, overlay);
-  game.append(imageDiv);
-}
+theGame();
