@@ -88,20 +88,48 @@ const resetButton = document.querySelector("#reset-button");
   // image.append(overlay); 
   game.append(image);
 } */
+let firstClick;
+let SecondClick;
 
 for (let i = 0; i < images.length; i++) {
   const imageDiv = document.createElement("div");
   imageDiv.className = "image-div";
 
-  const image = document.createElement("img");
-  image.src = images[i].src;
-  image.id = images[i].id;
-
   const overlay = document.createElement("img");
-  overlay.id = i;
+  overlay.id = images[i].id;
   overlay.className = "overlay";
   overlay.src = "Media/meraki-logo.jpg";
+  overlay.style.zIndex = 1;
+
+  const image = document.createElement("img");
+  image.src = images[i].src;
+  // image.id = images[i].id;
+
+  overlay.addEventListener("click", (e) => {
+    overlay.style.zIndex = -1;
+    if (firstClick === undefined) {
+    return firstClick = e.target.id; // overlay ID
+    }
+    if (firstClick !== e.target.id) {
+      console.log( "Wrong");
+      overlay.style.zIndex = 1;
+    }
+    if (firstClick === e.target.id) {
+      console.log( "correct");
+      firstClick = undefined
+      SecondClick = undefined
+    }
+
+  });
+
+  image.addEventListener("click", (e) => {
+    overlay.style.zIndex = 1;
+  });
 
   imageDiv.append(image, overlay);
   game.append(imageDiv);
 }
+
+/* image.addEventListener ('click', (e) => {
+    overlay.style.zIndex = -1
+}) */
