@@ -3,7 +3,7 @@ Main features:
 
 (DONE)  # Shuffle, and reshuffle after reset.
 
-(concept done slicedImages) # change the pairsNumber to the specific    number pairs needed in the game.
+(concept done slicedImages) # change the cardsNumber to the specific    number cards needed in the game.
 
 (DONE)  # Cards will appear for period of time (Ex.5 seconds) then it will flip to the other side. // (solved) still can play it during that
 
@@ -18,15 +18,15 @@ Main features:
 /* 
 Extra features:
         # Choose the time limit and show the timer.
-        # difficulty Number of Pairs ... //! update pairsNumber by DOM
+        # difficulty Number of cards ... //! update cardsNumber by DOM
         # wrongAttempts to loss the game //! update wrongAttempts by DOM
 (DONE)  # Show the pics for 10s
 (Not yet)   or start the game immediately button.
-        # Play music and stop button.
+(DONE)  # Play music and stop button.
 (DONE)  # Reset button and shuffle again.
         # Hint button and give hint after 3 mistakes.
         # Dark theme.
-
+        # motivational sentences.
         # shift the images to the center of the screen
         # local storage save progress 
         # 
@@ -37,7 +37,8 @@ Extra features:
 Bugs:
 # //! (solved) prevent clicks until setTimeout executed.
 # //! (solved) still can play it during that
-
+# //! music controls take a big portion of the header.
+# //! music not synced between pages (welcome main result)
 */
 
 const images = [
@@ -67,9 +68,35 @@ const images = [
   { id: 12, src: "Media/12.jpg" },
 ];
 
-let pairsNumber = 12; //! update pairsNumber by DOM
 
-const slicedImages = images.slice(0, pairsNumber * 2);
+const body = document.querySelector("body");
+const header = document.querySelector("#header");
+const footer = document.querySelector("#footer");
+
+const mainWelcome = document.querySelector("#main-welcome");
+const music = document.querySelector("#music");
+// let musicVol = document.getElementById("music");
+// musicVol.volume = 0.25; // to change the initial music volume level
+
+const dark = document.querySelector("#dark");
+const logo = document.querySelector("#logo");
+const welcome = document.querySelector("#welcome");
+const number = document.querySelector("#number");
+const difficulty = document.querySelector("#difficulty");
+const time = document.querySelector("#time");
+const playNowButton = document.querySelector("#play-now-button");
+
+//* /////////////// Welcome page eventListener ////////////////////
+
+/* playNowButton.addEventListener('click', (e)=> {
+console.log(e.target);
+}) */
+
+//* /////////////// cardsNumber slicedImages ////////////////////
+
+let cardsNumber = 20; //! update cardsNumber by DOM
+
+const slicedImages = images.slice(0, cardsNumber);
 
 const shuffle = (array) => {
   let shuffledArray = [];
@@ -83,22 +110,7 @@ const shuffle = (array) => {
 
 let shuffledImages = shuffle(slicedImages);
 
-const body = document.querySelector("body");
-const header = document.querySelector("#header");
-const footer = document.querySelector("#footer");
 
-const mainWelcome = document.querySelector("#main-welcome");
-const music = document.querySelector("#music");
-let musicVol = document.getElementById("music");
-musicVol.volume = 0.25;
-
-const dark = document.querySelector("#dark");
-const logo = document.querySelector("#logo");
-const welcome = document.querySelector("#welcome");
-const number = document.querySelector("#number");
-const difficulty = document.querySelector("#difficulty");
-const time = document.querySelector("#time");
-const playNowButton = document.querySelector("#play-now-button");
 
 const mainIndex = document.querySelector("#main-index");
 const timer = document.querySelector("#timer");
@@ -108,9 +120,15 @@ const hint = document.querySelector("#hint");
 const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 
+
+//* /////////////// preventClicks ////////////////////
 const preventClicks = document.createElement("img");
 preventClicks.src = "Media/meraki-logo.jpg";
 preventClicks.id = "prevent-clicks";
+
+
+//* /////////////// THE GAME ////////////////////
+
 const theGame = () => {
   let userClick;
   let firstImage;
@@ -163,7 +181,7 @@ const theGame = () => {
         correctPairsCounter++;
         userClick = undefined;
         firstImage = undefined;
-        if (correctPairsCounter === pairsNumber) {
+        if (correctPairsCounter === cardsNumber/2 ) {
           console.log("WIN");
         }
       }
@@ -172,8 +190,11 @@ const theGame = () => {
     game.append(imageDiv);
   }
 };
-
 theGame();
+
+
+
+//* /////////////// resetButton ////////////////////
 
 resetButton.addEventListener("click", (e) => {
   for (let i = 0; i < shuffledImages.length; i++) {
