@@ -82,19 +82,21 @@ const dark = document.querySelector("#dark");
 const logo = document.querySelector("#logo");
 const welcome = document.querySelector("#welcome");
 const number = document.querySelector("#number");
-const difficulty = document.querySelector("#difficulty");
+const numberSelect = document.querySelector("#number-select");
+
+const difficulty = document.querySelector("#difficulty"); //! wrongAttempts in the game
 const time = document.querySelector("#time");
 const playNowButton = document.querySelector("#play-now-button");
 
 //* /////////////// Welcome page eventListener ////////////////////
 
-/* playNowButton.addEventListener('click', (e)=> {
-console.log(e.target);
+let cardsNumber = 20; //! update cardsNumber by DOM
+/* numberSelect.addEventListener('change', (e)=>{
+  console.log(e.target.value);
 }) */
 
 //* /////////////// cardsNumber slicedImages ////////////////////
 
-let cardsNumber = 20; //! update cardsNumber by DOM
 
 const slicedImages = images.slice(0, cardsNumber);
 
@@ -115,6 +117,10 @@ let shuffledImages = shuffle(slicedImages);
 const mainIndex = document.querySelector("#main-index");
 const timer = document.querySelector("#timer");
 const motivation = document.querySelector("#motivation");
+let motivationInnerText = 'Good Luck'
+/* motivation.innerText = motivationInnerText
+mainIndex.append(motivation) */
+
 const game = document.querySelector("#game");
 const hint = document.querySelector("#hint");
 const start = document.querySelector("#start");
@@ -133,7 +139,7 @@ const theGame = () => {
   let userClick;
   let firstImage;
   let correctPairsCounter = 0;
-  let wrongAttempts = 5; //! user defined 
+  let wrongAttempts = 5; //! user defined wrongAttempts
   let wrongPairsCounter = 0;
 
   body.append(preventClicks);
