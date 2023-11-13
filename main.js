@@ -1,11 +1,11 @@
 /* 
 Main features:
 
-#shuffle
+(DONE)  # Shuffle, and reshuffle after reset.
 
-(concept done slicedImages) # change the images.length to the specific number of images needed in the game.
+(concept done slicedImages) # change the pairsNumber to the specific    number pairs needed in the game.
 
-(DONE)  # Cards will appear for period of time (Ex.5 seconds) then it will flip to the other side. //!  (solved) still can play it during that
+(DONE)  # Cards will appear for period of time (Ex.5 seconds) then it will flip to the other side. // (solved) still can play it during that
 
 (DONE)  # User will choose two cards.
 
@@ -38,6 +38,7 @@ Bugs:
 # //! (solved) still can play it during that
 
 */
+
 const images = [
   { id: 1, src: "Media/01.jpg" },
   { id: 1, src: "Media/01.jpg" },
@@ -65,14 +66,21 @@ const images = [
   { id: 12, src: "Media/12.jpg" },
 ];
 
-let pairsNumber = 7; //! update pairsNumber by DOM
+let pairsNumber = 12; //! update pairsNumber by DOM
 
 const slicedImages = images.slice(0, pairsNumber * 2);
 
-shuffleArray = (array) => {
-  let shuffled;
-  array[Math.floor(Math.random() * array.length - 1)];
+const shuffle = (array) => {
+  let shuffledArray = [];
+  for (let i = array.length; i > 0; i--) {
+    let randomIndex = Math.floor(Math.random() * array.length);
+    shuffledArray.push(array[randomIndex]);
+    array.splice(randomIndex, 1);
+  }
+  return shuffledArray;
 };
+
+let shuffledImages = shuffle(slicedImages);
 
 const body = document.querySelector("body");
 const header = document.querySelector("#header");
@@ -99,7 +107,6 @@ const resetButton = document.querySelector("#reset-button");
 const preventClicks = document.createElement("img");
 preventClicks.src = "Media/meraki-logo.jpg";
 preventClicks.id = "prevent-clicks";
-
 const theGame = () => {
   let userClick;
   let firstImage;
@@ -112,18 +119,18 @@ const theGame = () => {
     body.removeChild(preventClicks);
   }, 3010); //! prevent clicks at the game start for 3s, need to edit the animation when updating this duration.
 
-  for (let i = 0; i < slicedImages.length; i++) {
+  for (let i = 0; i < shuffledImages.length; i++) {
     const imageDiv = document.createElement("div");
     imageDiv.className = "image-div";
 
     const overlay = document.createElement("img");
-    overlay.id = slicedImages[i].id;
+    overlay.id = shuffledImages[i].id;
     overlay.className = "overlay";
     overlay.src = "Media/meraki-logo.jpg";
     overlay.style.zIndex = 1;
 
     const image = document.createElement("img");
-    image.src = slicedImages[i].src;
+    image.src = shuffledImages[i].src;
 
     overlay.addEventListener("click", (e) => {
       overlay.style.zIndex = -1;
@@ -165,10 +172,11 @@ const theGame = () => {
 theGame();
 
 resetButton.addEventListener("click", (e) => {
-  for (let i = 0; i < slicedImages.length; i++) {
+  for (let i = 0; i < shuffledImages.length; i++) {
     const imageDiv = document.querySelector(".image-div");
     // const overlay = document.querySelector(".overlay")
     game.removeChild(imageDiv);
   }
+  shuffledImages = shuffle(shuffledImages);
   theGame();
 });
