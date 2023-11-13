@@ -3,7 +3,7 @@ Main features:
 
 #shuffle
 
-(DONE) # Cards will appear for period of time (Ex.5 seconds) then it will flip to the other side. //! still can play it during that
+(DONE) # Cards will appear for period of time (Ex.5 seconds) then it will flip to the other side. //!  (solved) still can play it during that
 
 (DONE) # User will choose two cards.
 
@@ -26,8 +26,8 @@ Extra features:
 
 /* 
 Bugs:
-# prevent clicks until setTimeout executed.
-//! still can play it during that
+# //! (solved) prevent clicks until setTimeout executed.
+# //! (solved) still can play it during that
 */
 const images = [
   { id: 1, src: "Media/01.jpg" },
@@ -78,6 +78,9 @@ const hint = document.querySelector("#hint");
 const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 
+const preventClicks = document.createElement("img");
+preventClicks.src = "Media/meraki-logo.jpg";
+preventClicks.id = "prevent-clicks";
 // todo // change the images.length to the specific number of images needed in the game.
 
 const theGame = () => {
@@ -87,6 +90,11 @@ const theGame = () => {
   let correctPairsCounter = 0;
   let wrongAttempts = /* user defined */ 5;
   let wrongPairsCounter = 0;
+
+  body.append(preventClicks);
+  setTimeout(() => {
+    body.removeChild(preventClicks);
+  }, 3010); //! prevent clicks at the game start for 3s, need to edit the animation when updating this duration.
 
   for (let i = 0; i < images.length; i++) {
     const imageDiv = document.createElement("div");
@@ -112,12 +120,18 @@ const theGame = () => {
         if (wrongPairsCounter === wrongAttempts) {
           console.log("LOSS");
         }
-        //! prevent clicks until setTimeout executed. I removed the setTimeout for now.
+        body.append(preventClicks); //! (solved) prevent clicks until setTimeout executed.
+        setTimeout(() => {
+          body.removeChild(preventClicks);
+          overlay.style.zIndex = 1;
+          firstImage.style.zIndex = 1;
+          userClick = undefined;
+          firstImage = undefined;
+        }, 3000);
 
-        overlay.style.zIndex = 1;
-        firstImage.style.zIndex = 1;
-        userClick = undefined;
-        firstImage = undefined;
+        // overlay.style.animation = "flip-back-after-wrong-answer 3s";
+        // firstImage.style.animation = "flip-back-after-wrong-answer 3s"; //! (another sol. found) only works 1 time.
+        
       } else if (userClick === e.target.id) {
         console.log("correct");
         correctPairsCounter++;
