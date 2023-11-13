@@ -98,7 +98,7 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  opacity: 0.75; /* for testing only */
+/*   opacity: 0.75; */
   animation-name: apply-overlay;
   animation-duration: 3s;
   animation-fill-mode: forwards;
@@ -113,7 +113,7 @@ body {
     /* z-index: -1; */
   }
   100% {
-    opacity: 0.75;
+    opacity: 0.5;  /* not 1 (for testing only) */
     /* z-index: 1; */
   }
 }

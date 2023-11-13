@@ -3,25 +3,33 @@ Main features:
 
 #shuffle
 
-(DONE) # Cards will appear for period of time (Ex.5 seconds) then it will flip to the other side. //!  (solved) still can play it during that
+(concept done slicedImages) # change the images.length to the specific number of images needed in the game.
 
-(DONE) # User will choose two cards.
+(DONE)  # Cards will appear for period of time (Ex.5 seconds) then it will flip to the other side. //!  (solved) still can play it during that
 
-(DONE) # Cards will be checked Correct , Wrong.
+(DONE)  # User will choose two cards.
 
-# reset // When finish, user will see a screen with the result on it with a Play Again button.
+(DONE)  # Cards will be checked Correct , Wrong.
+
+        # reset // When finish, user will see a screen with the result on it with a Play Again button.
 
 */
 
 /* 
 Extra features:
-# Choose the time limit and show the timer.
-# Choose difficulty Number of Pairs ...
-# Show the pics for 10s or start the game immediately button.
-# Play music and stop button.
-# Reset button and shuffle again.
-# Hint button and give hint after 3 mistakes.
-# Dark theme.
+        # Choose the time limit and show the timer.
+        # difficulty Number of Pairs ... //! update pairsNumber by DOM
+(DONE)  # Show the pics for 10s
+(Not yet)   or start the game immediately button.
+        # Play music and stop button.
+(DONE)  # Reset button and shuffle again.
+        # Hint button and give hint after 3 mistakes.
+        # Dark theme.
+
+        # shift the images to the center of the screen
+        # local storage save progress 
+        # 
+
 */
 
 /* 
@@ -57,6 +65,15 @@ const images = [
   { id: 12, src: "Media/12.jpg" },
 ];
 
+let pairsNumber = 7; //! update pairsNumber by DOM
+
+const slicedImages = images.slice(0, pairsNumber * 2);
+
+shuffleArray = (array) => {
+  let shuffled;
+  array[Math.floor(Math.random() * array.length - 1)];
+};
+
 const body = document.querySelector("body");
 const header = document.querySelector("#header");
 const footer = document.querySelector("#footer");
@@ -82,12 +99,10 @@ const resetButton = document.querySelector("#reset-button");
 const preventClicks = document.createElement("img");
 preventClicks.src = "Media/meraki-logo.jpg";
 preventClicks.id = "prevent-clicks";
-// todo // change the images.length to the specific number of images needed in the game.
 
 const theGame = () => {
   let userClick;
   let firstImage;
-  let pairsNumber = images.length / 2;
   let correctPairsCounter = 0;
   let wrongAttempts = /* user defined */ 5;
   let wrongPairsCounter = 0;
@@ -97,18 +112,18 @@ const theGame = () => {
     body.removeChild(preventClicks);
   }, 3010); //! prevent clicks at the game start for 3s, need to edit the animation when updating this duration.
 
-  for (let i = 0; i < images.length; i++) {
+  for (let i = 0; i < slicedImages.length; i++) {
     const imageDiv = document.createElement("div");
     imageDiv.className = "image-div";
 
     const overlay = document.createElement("img");
-    overlay.id = images[i].id;
+    overlay.id = slicedImages[i].id;
     overlay.className = "overlay";
     overlay.src = "Media/meraki-logo.jpg";
     overlay.style.zIndex = 1;
 
     const image = document.createElement("img");
-    image.src = images[i].src;
+    image.src = slicedImages[i].src;
 
     overlay.addEventListener("click", (e) => {
       overlay.style.zIndex = -1;
@@ -132,7 +147,6 @@ const theGame = () => {
 
         // overlay.style.animation = "flip-back-after-wrong-answer 3s";
         // firstImage.style.animation = "flip-back-after-wrong-answer 3s"; //! (another sol. found) only works 1 time.
-
       } else if (userClick === e.target.id) {
         console.log("correct");
         correctPairsCounter++;
@@ -151,7 +165,7 @@ const theGame = () => {
 theGame();
 
 resetButton.addEventListener("click", (e) => {
-  for (let i = 0; i < images.length; i++) {
+  for (let i = 0; i < slicedImages.length; i++) {
     const imageDiv = document.querySelector(".image-div");
     // const overlay = document.querySelector(".overlay")
     game.removeChild(imageDiv);
