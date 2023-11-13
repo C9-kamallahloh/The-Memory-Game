@@ -79,11 +79,11 @@ const footer = document.querySelector("#footer");
 //
 const bodyWelcome = document.querySelector("#body-welcome");
 const mainWelcome = document.querySelector("#main-welcome");
-const classWelcome = document.querySelector(".welcome");
+const welcomeClass = document.querySelector(".welcome-class");
 const music = document.querySelector("#music");
 const dark = document.querySelector("#dark");
 const logo = document.querySelector("#logo");
-const welcome = document.querySelector("#welcome");
+const welcome = document.querySelector(".welcome-text");
 const number = document.querySelector("#number");
 const numberSelect = document.querySelector("#number-select");
 const difficulty = document.querySelector("#difficulty"); //! wrongAttempts in the game
@@ -93,6 +93,7 @@ const playNowButton = document.querySelector("#play-now-button");
 //
 const bodyGame = document.querySelector("#body-game");
 const mainIndex = document.querySelector("#main-index");
+const gameClass = document.querySelector(".game-class");
 const timer = document.querySelector("#timer");
 const motivation = document.querySelector("#motivation");
 const game = document.querySelector("#game");
@@ -113,16 +114,17 @@ numberSelect.addEventListener("change", (e) => {
 
 bodyWelcome.style.display = "block";
 bodyGame.style.display = "none";
-classWelcome.style.display = "inherit";
+welcomeClass.style.display = "inherit";
+gameClass.style.display = "none";
 
 const nextPage = (event, cardsNumber) => {
   if (bodyWelcome.style.display === "block") {
     bodyWelcome.style.display = "none";
     bodyGame.style.display = "block";
-    classWelcome.style.display = "none";
-  } else {
-    bodyWelcome.style.display = "block";
-    bodyGame.style.display = "none";
+    welcomeClass.style.display = "none"; //! not working for button and text, override.
+    playNowButton.style.display = "none";
+    welcomeClass.style.display = "none";
+    gameClass.style.display = "block";
   }
 
   //* /////////////// cardsNumber slicedImages ////////////////////
