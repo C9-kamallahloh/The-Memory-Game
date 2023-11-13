@@ -79,6 +79,7 @@ const footer = document.querySelector("#footer");
 //
 const bodyWelcome = document.querySelector("#body-welcome");
 const mainWelcome = document.querySelector("#main-welcome");
+const classWelcome = document.querySelector(".welcome");
 const music = document.querySelector("#music");
 const dark = document.querySelector("#dark");
 const logo = document.querySelector("#logo");
@@ -102,52 +103,49 @@ const resetButton = document.querySelector("#reset-button");
 //
 //* /////////////// Welcome page eventListener ////////////////////
 
-let cardsNumber = 12;  //! 12 is the selected default value, need to change it here with the HTML select tag.
+let cardsNumber = 12; //! 12 is the selected default value, need to change it here with the HTML select tag.
 
 numberSelect.addEventListener("change", (e) => {
-    cardsNumber = e.target.value;
-    // console.log("inside event : ", cardsNumber);
-    return cardsNumber
-  });
-  
-  // console.log("outside event : ", cardsNumber);
+  cardsNumber = e.target.value;
+});
 
 //* /////////////// Next Page ////////////////////
 
 bodyWelcome.style.display = "block";
 bodyGame.style.display = "none";
+classWelcome.style.display = "inherit";
 
-const nextPage = (event,cardsNumber) => {
+const nextPage = (event, cardsNumber) => {
   if (bodyWelcome.style.display === "block") {
     bodyWelcome.style.display = "none";
     bodyGame.style.display = "block";
+    classWelcome.style.display = "none";
   } else {
     bodyWelcome.style.display = "block";
     bodyGame.style.display = "none";
   }
 
-//* /////////////// cardsNumber slicedImages ////////////////////
+  //* /////////////// cardsNumber slicedImages ////////////////////
 
-let slicedImages = images.slice(0, cardsNumber);
+  let slicedImages = images.slice(0, cardsNumber);
 
-const shuffle = (array) => {
-  let shuffledArray = [];
-  for (let i = array.length; i > 0; i--) {
-    let randomIndex = Math.floor(Math.random() * array.length);
-    shuffledArray.push(array[randomIndex]);
-    array.splice(randomIndex, 1);
-  }
-  return shuffledArray;
+  const shuffle = (array) => {
+    let shuffledArray = [];
+    for (let i = array.length; i > 0; i--) {
+      let randomIndex = Math.floor(Math.random() * array.length);
+      shuffledArray.push(array[randomIndex]);
+      array.splice(randomIndex, 1);
+    }
+    return shuffledArray;
+  };
+
+  let shuffledImages = shuffle(slicedImages);
+
+  theGame(shuffledImages);
 };
 
-let shuffledImages = shuffle(slicedImages);
-
-theGame(shuffledImages);
-
-};
-
-playNowButton.addEventListener("click", (event)=>{
-  nextPage(event,cardsNumber)
+playNowButton.addEventListener("click", (event) => {
+  nextPage(event, cardsNumber);
 });
 
 //* /////////////// preventClicks ////////////////////

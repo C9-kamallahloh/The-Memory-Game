@@ -8,7 +8,10 @@
   </head>
   <body>
     <header id="header">
-      <h4>MERAKI_Academy_Project_1 <br> B06_Kamal Lahloh</h4>
+      <h4>
+        MERAKI_Academy_Project_1 <br />
+        B06_Kamal Lahloh
+      </h4>
       <h1>THE MEMORY GAME</h1>
       <button id="dark">Dark Theme</button>
     </header>
@@ -19,9 +22,11 @@
 
     <div id="body-welcome">
       <main id="main-welcome">
-        <div id="logo"><img src="Media/meraki-logo.jpg" alt="logo" /></div>
+        <div id="logo" class="welcome">
+          <img src="Media/meraki-logo.jpg" alt="logo" />
+        </div>
         <!--       <div id="main-right"> -->
-        <div id="welcome">
+        <div id="welcome-text" class="welcome">
           <h4>Welcome to The Memory Game</h4>
           <br />
           How to Play: <br />
@@ -101,10 +106,12 @@
       <div>
         <button id="reset-button">Reset</button>
       </div>
-      <div>
-        <button id="play-now-button">Play Now</button>
-        <!-- <button>See result</button> -->
-      </div>
+
+        <div class="welcome">
+          <button id="play-now-button">Play Now</button>
+        </div>
+        <button>See result</button>
+
     </footer>
 
     <script src="main.js"></script>
