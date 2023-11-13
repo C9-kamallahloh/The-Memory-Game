@@ -19,6 +19,7 @@ Main features:
 Extra features:
         # Choose the time limit and show the timer.
         # difficulty Number of Pairs ... //! update pairsNumber by DOM
+        # wrongAttempts to loss the game //! update wrongAttempts by DOM
 (DONE)  # Show the pics for 10s
 (Not yet)   or start the game immediately button.
         # Play music and stop button.
@@ -88,6 +89,9 @@ const footer = document.querySelector("#footer");
 
 const mainWelcome = document.querySelector("#main-welcome");
 const music = document.querySelector("#music");
+let musicVol = document.getElementById("music");
+musicVol.volume = 0.25;
+
 const dark = document.querySelector("#dark");
 const logo = document.querySelector("#logo");
 const welcome = document.querySelector("#welcome");
@@ -111,7 +115,7 @@ const theGame = () => {
   let userClick;
   let firstImage;
   let correctPairsCounter = 0;
-  let wrongAttempts = /* user defined */ 5;
+  let wrongAttempts = 5; //! user defined 
   let wrongPairsCounter = 0;
 
   body.append(preventClicks);

@@ -15,6 +15,9 @@ body {
   display: flex;
   justify-content: space-between;
 }
+#music {
+
+}
 #main-welcome {
   display: grid;
   grid-template: 2fr 1fr / 2fr 1fr 1fr 1fr;
