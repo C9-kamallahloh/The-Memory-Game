@@ -28,6 +28,7 @@ Extra features:
 Bugs:
 # //! (solved) prevent clicks until setTimeout executed.
 # //! (solved) still can play it during that
+
 */
 const images = [
   { id: 1, src: "Media/01.jpg" },
@@ -131,7 +132,7 @@ const theGame = () => {
 
         // overlay.style.animation = "flip-back-after-wrong-answer 3s";
         // firstImage.style.animation = "flip-back-after-wrong-answer 3s"; //! (another sol. found) only works 1 time.
-        
+
       } else if (userClick === e.target.id) {
         console.log("correct");
         correctPairsCounter++;
