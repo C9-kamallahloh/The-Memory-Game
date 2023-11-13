@@ -76,8 +76,15 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  opacity: 0.75; 
-/*   z-index: 1;*/
+  opacity: 0; /* for testing only */
+  animation-name: apply-overlay;
+  animation-duration: 5s;  
+  animation-fill-mode: forwards;
+}
+@keyframes apply-overlay {
+  0% {  opacity: 0;}
+  99%{  opacity: 0;}
+  100%{  opacity: 0.75;}
 }
 
 #hint {

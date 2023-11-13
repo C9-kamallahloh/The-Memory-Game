@@ -3,7 +3,7 @@ Main features:
 
 #shuffle
 
-# Cards will appear for period of time (Ex.10 seconds) then it will flip to the other side.
+(DONE) # Cards will appear for period of time (Ex.5 seconds) then it will flip to the other side. //! still can play it during that
 
 (DONE) # User will choose two cards.
 
@@ -27,6 +27,7 @@ Extra features:
 /* 
 Bugs:
 # prevent clicks until setTimeout executed.
+//! still can play it during that
 */
 const images = [
   { id: 1, src: "Media/01.jpg" },
@@ -111,13 +112,12 @@ const theGame = () => {
         if (wrongPairsCounter === wrongAttempts) {
           console.log("LOSS");
         }
-        //! prevent clicks until setTimeout executed.
-        setTimeout(() => {
-          overlay.style.zIndex = 1;
-          firstImage.style.zIndex = 1;
-          userClick = undefined;
-          firstImage = undefined;
-        }, 1000);
+        //! prevent clicks until setTimeout executed. I removed the setTimeout for now.
+
+        overlay.style.zIndex = 1;
+        firstImage.style.zIndex = 1;
+        userClick = undefined;
+        firstImage = undefined;
       } else if (userClick === e.target.id) {
         console.log("correct");
         correctPairsCounter++;
@@ -136,7 +136,7 @@ const theGame = () => {
 theGame();
 
 resetButton.addEventListener("click", (e) => {
-  for (let i = 0; i <  images.length ; i++) {
+  for (let i = 0; i < images.length; i++) {
     const imageDiv = document.querySelector(".image-div");
     // const overlay = document.querySelector(".overlay")
     game.removeChild(imageDiv);
