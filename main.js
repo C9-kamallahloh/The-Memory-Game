@@ -18,7 +18,7 @@ Main features:
 /* 
 Extra features:
         # Choose the time limit and show the timer.
-        # difficulty Number of cards ... //! update cardsNumber by DOM
+(DONE)  # difficulty Number of cards.
         # wrongAttempts to loss the game //! update wrongAttempts by DOM
 (DONE)  # Show the pics for 10s
 (Not yet)   or start the game immediately button.
@@ -39,6 +39,7 @@ Bugs:
 # //! (solved) still can play it during that
 # //! music controls take a big portion of the header.
 # //! music not synced between pages (welcome main result)
+# //! edit reset button, it stopped working after cardsNumber updated
 */
 
 const images = [
@@ -99,15 +100,24 @@ const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 //
 //
+//* /////////////// Welcome page eventListener ////////////////////
+
+let cardsNumber = 12;  //! 12 is the selected default value, need to change it here with the HTML select tag.
+
+numberSelect.addEventListener("change", (e) => {
+    cardsNumber = e.target.value;
+    // console.log("inside event : ", cardsNumber);
+    return cardsNumber
+  });
+  
+  // console.log("outside event : ", cardsNumber);
 
 //* /////////////// Next Page ////////////////////
 
 bodyWelcome.style.display = "block";
 bodyGame.style.display = "none";
 
-const nextPage = () => {
-  debugger
-  console.log(bodyGame.style.display);
+const nextPage = (event,cardsNumber) => {
   if (bodyWelcome.style.display === "block") {
     bodyWelcome.style.display = "none";
     bodyGame.style.display = "block";
@@ -115,20 +125,6 @@ const nextPage = () => {
     bodyWelcome.style.display = "block";
     bodyGame.style.display = "none";
   }
-};
-
-playNowButton.addEventListener("click", nextPage);
-
-//* /////////////// Welcome page eventListener ////////////////////
-let cardsNumber = 24; //! update cardsNumber by DOM
-
-numberSelect.addEventListener("change", (e) => {
-  cardsNumber = e.target.value;
-  console.log("inside event : ", cardsNumber);
-  // return cardsNumber
-});
-
-console.log("outside event : ", cardsNumber);
 
 //* /////////////// cardsNumber slicedImages ////////////////////
 
@@ -145,6 +141,14 @@ const shuffle = (array) => {
 };
 
 let shuffledImages = shuffle(slicedImages);
+
+theGame(shuffledImages);
+
+};
+
+playNowButton.addEventListener("click", (event)=>{
+  nextPage(event,cardsNumber)
+});
 
 //* /////////////// preventClicks ////////////////////
 const preventClicks = document.createElement("img");
@@ -164,7 +168,7 @@ mainIndex.append(motivation);
 
 //* /////////////// THE GAME ////////////////////
 
-const theGame = () => {
+const theGame = (shuffledImages) => {
   let userClick;
   let firstImage;
   let correctPairsCounter = 0;
@@ -225,7 +229,6 @@ const theGame = () => {
     game.append(imageDiv);
   }
 };
-theGame();
 
 //* /////////////// resetButton ////////////////////
 

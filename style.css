@@ -18,10 +18,10 @@ body {
   color: red;
 }
 #header {
-  display: flex;
-  justify-content: space-between;
-}
-#music {
+  display: grid;
+  grid-template: 1fr / 1fr 4fr 1fr;
+  gap: 10px;
+  text-align:left;
 }
 #main-welcome {
   display: grid;
@@ -154,4 +154,6 @@ body {
 #footer {
   display: flex;
   justify-content: space-between;
+}
+#music {
 }

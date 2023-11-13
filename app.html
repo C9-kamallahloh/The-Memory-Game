@@ -7,18 +7,17 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <header id="header">
+      <h4>MERAKI_Academy_Project_1 <br> B06_Kamal Lahloh</h4>
+      <h1>THE MEMORY GAME</h1>
+      <button id="dark">Dark Theme</button>
+    </header>
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------ -->
+
     <div id="body-welcome">
-      <header id="header">
-        <div>
-          <!-- 
-        <audio id="music" controls autoplay muted > 
-          <source src="Media/Canon in D - Pachelbel.mp3" type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
-        --></div>
-        <h1>THE MEMORY GAME</h1>
-        <button id="dark">Dark</button>
-      </header>
       <main id="main-welcome">
         <div id="logo"><img src="Media/meraki-logo.jpg" alt="logo" /></div>
         <!--       <div id="main-right"> -->
@@ -68,30 +67,11 @@
         </div>
         <!--  </div>-->
       </main>
-      <footer id="footer">
-        <h4>MERAKI_Academy_Project_1 - B06_Kamal Lahloh - Memory card</h4>
-        <button id="play-now-button">Play Now</button>
-      </footer>
     </div>
+
     <!-- ------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------ -->
+
     <div id="body-game">
-      <header id="header">
-        <div>
-          <audio id="music" loop controls>
-            <!-- autoplay muted -->
-            <source src="Media/Canon in D - Pachelbel.mp3" type="audio/mpeg" />
-
-            <a href="Media/Canon in D - Pachelbel.mp3"> Download audio </a>
-          </audio>
-          <!--  <button id="mute-music">Mute</button>
-          -->
-        </div>
-
-        <h1>THE MEMORY GAME</h1>
-        <button id="dark">Dark</button>
-      </header>
       <main id="main-index">
         <div id="timer"></div>
         <div>
@@ -101,12 +81,32 @@
         <div id="hint"></div>
         <div id="start"></div>
       </main>
-      <footer id="footer">
-        <h4>MERAKI_Academy_Project_1 - B06_Kamal Lahloh - Memory card</h4>
-        <button id="reset-button">Reset</button>
-        <button id="play-now-button">See result</button>
-      </footer>
     </div>
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------ -->
+
+    <footer id="footer">
+      <div>
+        <audio id="music" loop controls>
+          <!-- autoplay muted -->
+          <source src="Media/Canon in D - Pachelbel.mp3" type="audio/mpeg" />
+
+          <a href="Media/Canon in D - Pachelbel.mp3"> Download audio </a>
+        </audio>
+        <!--  <button id="mute-music">Mute</button>
+        -->
+      </div>
+      <div>
+        <button id="reset-button">Reset</button>
+      </div>
+      <div>
+        <button id="play-now-button">Play Now</button>
+        <!-- <button>See result</button> -->
+      </div>
+    </footer>
+
     <script src="main.js"></script>
   </body>
 </html>
