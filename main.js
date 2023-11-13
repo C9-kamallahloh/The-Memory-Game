@@ -68,37 +68,71 @@ const images = [
   { id: 12, src: "Media/12.jpg" },
 ];
 
+//
+//
 
 const body = document.querySelector("body");
 const header = document.querySelector("#header");
 const footer = document.querySelector("#footer");
-
+//
+//
+const bodyWelcome = document.querySelector("#body-welcome");
 const mainWelcome = document.querySelector("#main-welcome");
 const music = document.querySelector("#music");
-// let musicVol = document.getElementById("music");
-// musicVol.volume = 0.25; // to change the initial music volume level
-
 const dark = document.querySelector("#dark");
 const logo = document.querySelector("#logo");
 const welcome = document.querySelector("#welcome");
 const number = document.querySelector("#number");
 const numberSelect = document.querySelector("#number-select");
-
 const difficulty = document.querySelector("#difficulty"); //! wrongAttempts in the game
 const time = document.querySelector("#time");
 const playNowButton = document.querySelector("#play-now-button");
+//
+//
+const bodyGame = document.querySelector("#body-game");
+const mainIndex = document.querySelector("#main-index");
+const timer = document.querySelector("#timer");
+const motivation = document.querySelector("#motivation");
+const game = document.querySelector("#game");
+const hint = document.querySelector("#hint");
+const start = document.querySelector("#start");
+const resetButton = document.querySelector("#reset-button");
+//
+//
+
+//* /////////////// Next Page ////////////////////
+
+bodyWelcome.style.display = "block";
+bodyGame.style.display = "none";
+
+const nextPage = () => {
+  debugger
+  console.log(bodyGame.style.display);
+  if (bodyWelcome.style.display === "block") {
+    bodyWelcome.style.display = "none";
+    bodyGame.style.display = "block";
+  } else {
+    bodyWelcome.style.display = "block";
+    bodyGame.style.display = "none";
+  }
+};
+
+playNowButton.addEventListener("click", nextPage);
 
 //* /////////////// Welcome page eventListener ////////////////////
+let cardsNumber = 24; //! update cardsNumber by DOM
 
-let cardsNumber = 20; //! update cardsNumber by DOM
-/* numberSelect.addEventListener('change', (e)=>{
-  console.log(e.target.value);
-}) */
+numberSelect.addEventListener("change", (e) => {
+  cardsNumber = e.target.value;
+  console.log("inside event : ", cardsNumber);
+  // return cardsNumber
+});
+
+console.log("outside event : ", cardsNumber);
 
 //* /////////////// cardsNumber slicedImages ////////////////////
 
-
-const slicedImages = images.slice(0, cardsNumber);
+let slicedImages = images.slice(0, cardsNumber);
 
 const shuffle = (array) => {
   let shuffledArray = [];
@@ -112,26 +146,21 @@ const shuffle = (array) => {
 
 let shuffledImages = shuffle(slicedImages);
 
-
-
-const mainIndex = document.querySelector("#main-index");
-const timer = document.querySelector("#timer");
-const motivation = document.querySelector("#motivation");
-let motivationInnerText = 'Good Luck'
-/* motivation.innerText = motivationInnerText
-mainIndex.append(motivation) */
-
-const game = document.querySelector("#game");
-const hint = document.querySelector("#hint");
-const start = document.querySelector("#start");
-const resetButton = document.querySelector("#reset-button");
-
-
 //* /////////////// preventClicks ////////////////////
 const preventClicks = document.createElement("img");
 preventClicks.src = "Media/meraki-logo.jpg";
 preventClicks.id = "prevent-clicks";
 
+//* /////////////// Music ////////////////////
+
+// let musicVol = document.getElementById("music");
+// musicVol.volume = 0.25; // to change the initial music volume level
+
+//* /////////////// motivation ////////////////////
+
+let motivationInnerText = "Good Luck";
+motivation.innerText = motivationInnerText;
+mainIndex.append(motivation);
 
 //* /////////////// THE GAME ////////////////////
 
@@ -187,7 +216,7 @@ const theGame = () => {
         correctPairsCounter++;
         userClick = undefined;
         firstImage = undefined;
-        if (correctPairsCounter === cardsNumber/2 ) {
+        if (correctPairsCounter === cardsNumber / 2) {
           console.log("WIN");
         }
       }
@@ -197,8 +226,6 @@ const theGame = () => {
   }
 };
 theGame();
-
-
 
 //* /////////////// resetButton ////////////////////
 

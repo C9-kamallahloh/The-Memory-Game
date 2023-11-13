@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>THE MEMORY GAME</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="body-welcome">
+      <header id="header">
+        <div>
+          <!-- 
+        <audio id="music" controls autoplay muted > 
+          <source src="Media/Canon in D - Pachelbel.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+        --></div>
+        <h1>THE MEMORY GAME</h1>
+        <button id="dark">Dark</button>
+      </header>
+      <main id="main-welcome">
+        <div id="logo"><img src="Media/meraki-logo.jpg" alt="logo" /></div>
+        <!--       <div id="main-right"> -->
+        <div id="welcome">
+          <h4>Welcome to The Memory Game</h4>
+          <br />
+          How to Play: <br />
+          The game starts with all the cards face-down. Start by turning over
+          two cards. If the two cards have the same picture, the cards stays
+          face-up, otherwise the cards turns face-down again. You will win if
+          all the cards faces-up. <br />
+          At first choose the number of cards to start the game with. The
+          difficulty since you need to finish the game with less mistakes than
+          what you chooses. And the time limit to finish the game within.
+        </div>
+        <div id="number" class="number choices">
+          <label for="number">number of cards:</label>
+          <select id="number-select" name="number" class="number select">
+            <option value="24">24</option>
+            <option value="22">22</option>
+            <option value="20">20</option>
+            <option value="18">18</option>
+            <option value="16">16</option>
+            <option value="14">14</option>
+            <option value="12" selected>12</option>
+            <option value="10">10</option>
+            <option value="8">8</option>
+            <option value="6">6</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <div id="difficulty" class="difficulty choices">
+          <label for="difficulty">Difficulty:</label>
+          <select name="difficulty" class="difficulty select">
+            <option value="hard">5 mistakes</option>
+            <option value="med" selected>20 mistakes</option>
+            <option value="easy">unlimited mistakes</option>
+          </select>
+        </div>
+        <div id="time" class="time choices">
+          <label for="time">Time:</label>
+          <select name="time" class="time select">
+            <option value="2-min">2 Minutes</option>
+            <option value="10-min" selected>10 Minutes</option>
+            <option value="no-time">No time limit</option>
+          </select>
+        </div>
+        <!--  </div>-->
+      </main>
+      <footer id="footer">
+        <h4>MERAKI_Academy_Project_1 - B06_Kamal Lahloh - Memory card</h4>
+        <button id="play-now-button">Play Now</button>
+      </footer>
+    </div>
+    <!-- ------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------ -->
+    <div id="body-game">
+      <header id="header">
+        <div>
+          <audio id="music" loop controls>
+            <!-- autoplay muted -->
+            <source src="Media/Canon in D - Pachelbel.mp3" type="audio/mpeg" />
+
+            <a href="Media/Canon in D - Pachelbel.mp3"> Download audio </a>
+          </audio>
+          <!--  <button id="mute-music">Mute</button>
+          -->
+        </div>
+
+        <h1>THE MEMORY GAME</h1>
+        <button id="dark">Dark</button>
+      </header>
+      <main id="main-index">
+        <div id="timer"></div>
+        <div>
+          <p id="motivation"></p>
+        </div>
+        <div id="game"></div>
+        <div id="hint"></div>
+        <div id="start"></div>
+      </main>
+      <footer id="footer">
+        <h4>MERAKI_Academy_Project_1 - B06_Kamal Lahloh - Memory card</h4>
+        <button id="reset-button">Reset</button>
+        <button id="play-now-button">See result</button>
+      </footer>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
