@@ -27,7 +27,7 @@ Extra features:
 (button added, concept not yet) # Hint button and give hint after 3 mistakes. 
         # Dark theme.
         # motivational sentences.
-        # shift the images to the center of the screen
+(DONE)  # shift the images to the center of the screen
         # local storage save progress 
         # 
 
