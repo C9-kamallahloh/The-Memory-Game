@@ -114,12 +114,18 @@ const resetButton = document.querySelector("#reset-button");
 //
 //* /////////////// Welcome page eventListener ////////////////////
 
-let cardsNumber = 8; //! 8 is the selected default value, need to change it here with the HTML select tag.
+let cardsNumber = Number(numberSelect.value);
+// console.log(typeof cardsNumber, cardsNumber);
 let wrongPairsCounter = 0;
 let correctPairsCounter = 0;
-let wrongAttempts = 5; //! user defined wrongAttempts
+let wrongAttempts = Number(difficultySelect.value);
+// console.log('wrongAttempts', typeof wrongAttempts)
+if (wrongAttempts >= 0) {
+  wrongAttemptsCounter.innerText = ` of ${wrongAttempts}`;
+} else {
+  wrongAttemptsCounter.innerText = ` of unlimited`;
+}
 numberOfMistakes.innerText = 0;
-wrongAttemptsCounter.innerText = " of 20"; //! 20 is the selected default value, need to change it here with the HTML select tag.
 numberOfMistakesDiv.append(numberOfMistakes, wrongAttemptsCounter);
 
 //
