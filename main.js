@@ -19,9 +19,9 @@ todo: Main features (DONE):
 Extra features:
         # Choose the time limit and show the timer.
 (DONE)  # difficulty Number of cards.
-        # wrongAttempts to lost the game //! update wrongAttempts by DOM
-(DONE)  # Show the pics for 10s
-(Not yet)   or start the game immediately button.
+(DONE)  # wrongAttempts to lost the game
+(DONE)  # Show the pics for a number of seconds ex.5s
+(skipped)   or start the game immediately button.
 (DONE)  # Play music and stop button.
 (DONE)  # Reset button and shuffle again.
 (button added, concept not yet) # Hint button and give hint after 3 mistakes. 
@@ -106,6 +106,8 @@ const hintDiv = document.querySelector("#hint-div");
 const hintButton = document.querySelector("#hint-button");
 const numberOfMistakesDiv = document.querySelector(".number-of-mistakes");
 const numberOfMistakes = document.querySelector("#number-of-mistakes");
+const wrongAttemptsCounter = document.querySelector("#wrong-attempts-counter");
+
 const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 //
@@ -117,7 +119,11 @@ let wrongPairsCounter = 0;
 let correctPairsCounter = 0;
 let wrongAttempts = 5; //! user defined wrongAttempts
 numberOfMistakes.innerText = 0;
-numberOfMistakesDiv.append(numberOfMistakes);
+wrongAttemptsCounter.innerText = " of 20"; //! 20 is the selected default value, need to change it here with the HTML select tag.
+numberOfMistakesDiv.append(numberOfMistakes, wrongAttemptsCounter);
+
+//
+//
 
 numberSelect.addEventListener("change", (e) => {
   cardsNumber = e.target.value;
@@ -126,7 +132,16 @@ difficultySelect.addEventListener("change", (e) => {
   wrongAttempts = Number(e.target.value);
   // wrongAttempts = e.target.value;
   // console.log(typeof wrongAttempts, wrongAttempts);
+
+  if (wrongAttempts >= 0) {
+    wrongAttemptsCounter.innerText = ` of ${wrongAttempts}`;
+  } else {
+    wrongAttemptsCounter.innerText = ` of unlimited`;
+  }
 });
+
+//
+//
 
 bodyWelcome.style.display = "block";
 bodyGame.style.display = "none";
