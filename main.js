@@ -84,7 +84,7 @@ const music = document.querySelector("#music");
 const dark = document.querySelector("#dark");
 const logo = document.querySelector("#logo");
 const logoPhoto = document.querySelector("#logo-photo");
-
+const logoText = document.querySelector("#logo-text");
 const welcome = document.querySelector(".welcome-text");
 const number = document.querySelector("#number");
 const numberSelect = document.querySelector("#number-select");
@@ -111,6 +111,8 @@ const resetButton = document.querySelector("#reset-button");
 //* /////////////// Welcome page eventListener ////////////////////
 
 let cardsNumber = 8; //! 8 is the selected default value, need to change it here with the HTML select tag.
+let wrongPairsCounter = 0;
+let correctPairsCounter = 0;
 numberOfMistakes.innerText = 0;
 numberOfMistakesDiv.append(numberOfMistakes);
 
@@ -171,8 +173,15 @@ playAgainButton.addEventListener("click", (event) => {
 
 //* /////////////// resetButton ////////////////////
 
+resetButton.addEventListener("hover", (event) => {
+  resetButton.style.color = "red";
+
+  if (wrongPairsCounter !== 0 || correctPairsCounter !== 0) {
+  }
+});
+
 resetButton.addEventListener("click", (event) => {
-/*   for (let i = 0; i < shuffledImages.length; i++) {
+  /*   for (let i = 0; i < shuffledImages.length; i++) {
     const imageDiv = document.querySelector(".image-div");
     game.removeChild(imageDiv);
   }
@@ -181,8 +190,15 @@ resetButton.addEventListener("click", (event) => {
   hintButton.style.display = "none";
   playTheGame(event, cardsNumber);
  */
-// if(numberOfMistakes.innerText !== 0 || )
+  if (wrongPairsCounter !== 0 || correctPairsCounter !== 0) {
+    logoPhoto.src = "Media/you-lose.jpg";
+
+    logoText.innerText =
+      "You lost because you rested the game after you start playing it";
+  }
+  wrongPairsCounter = 0;
   numberOfMistakes.innerText = 0;
+  correctPairsCounter = 0;
   bodyWelcome.style.display = "block";
   bodyGame.style.display = "none";
   gameClass.style.display = "none";
@@ -210,9 +226,7 @@ mainIndex.append(motivation);
 const theGame = (shuffledImages) => {
   let userClick;
   let firstImage;
-  let correctPairsCounter = 0;
   let wrongAttempts = 4; //! user defined wrongAttempts
-  let wrongPairsCounter = 0;
 
   body.append(preventClicks);
   setTimeout(() => {
@@ -248,11 +262,13 @@ const theGame = (shuffledImages) => {
         }
         if (wrongPairsCounter === wrongAttempts) {
           console.log("LOST");
-          numberOfMistakes.innerText = 0;
+          wrongPairsCounter = 0;
+          // numberOfMistakes.innerText = 0;
           bodyWelcome.style.display = "block";
           bodyGame.style.display = "none";
           gameClass.style.display = "none";
           logoPhoto.src = "Media/you-lose.jpg";
+          logoText.innerText = `Try Again, you can do better.`;
           playAgainButton.style.display = "block";
         }
         body.append(preventClicks);
@@ -270,11 +286,13 @@ const theGame = (shuffledImages) => {
         firstImage = undefined;
         if (correctPairsCounter === cardsNumber / 2) {
           console.log("WON");
-          numberOfMistakes.innerText = 0;
+          wrongPairsCounter = 0;
+          // numberOfMistakes.innerText = 0;
           bodyWelcome.style.display = "block";
           bodyGame.style.display = "none";
           gameClass.style.display = "none";
           logoPhoto.src = "Media/you-win.jpg";
+          logoText.innerText = `Congrats!! you are Awesome.`;
           playAgainButton.style.display = "block";
         }
       }
