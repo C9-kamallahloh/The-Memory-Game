@@ -1,9 +1,9 @@
 /* 
-Main features:
+todo: Main features (DONE):
 
 (DONE)  # Shuffle, and reshuffle after reset.
 
-(concept done slicedImages) # change the cardsNumber to the specific    number cards needed in the game.
+(DONE) # change the cardsNumber to the specific    number cards needed in the game.
 
 (DONE)  # Cards will appear for period of time (Ex.5 seconds) then it will flip to the other side. // (solved) still can play it during that
 
@@ -11,7 +11,7 @@ Main features:
 
 (DONE)  # Cards will be checked Correct , Wrong.
 
-        # reset // When finish, user will see a screen with the result on it with a Play Again button.
+(DONE)  # reset // When finish, user will see a screen with the result on it with a Play Again button.
 
 */
 
@@ -24,7 +24,7 @@ Extra features:
 (Not yet)   or start the game immediately button.
 (DONE)  # Play music and stop button.
 (DONE)  # Reset button and shuffle again.
-        # Hint button and give hint after 3 mistakes.
+(button added, concept not yet) # Hint button and give hint after 3 mistakes. 
         # Dark theme.
         # motivational sentences.
         # shift the images to the center of the screen
@@ -37,9 +37,9 @@ Extra features:
 Bugs:
 # //! (solved) prevent clicks until setTimeout executed.
 # //! (solved) still can play it during that
-# //! music controls take a big portion of the header.
-# //! music not synced between pages (welcome main result)
-# //! edit reset button, it stopped working after cardsNumber updated
+# //! (solved) music controls take a big portion of the header. // moved to the footer.
+# //! (solved) music not synced between pages (welcome main result) // update the html pages to single page. (app.html)
+# //! (solved) edit reset button, it stopped working after cardsNumber updated
 */
 
 const images = [
@@ -190,11 +190,13 @@ resetButton.addEventListener("click", (event) => {
   hintButton.style.display = "none";
   playTheGame(event, cardsNumber);
  */
+  logoPhoto.src = "Media/meraki-logo.jpg";
+  logoText.innerText = "";
   if (wrongPairsCounter !== 0 || correctPairsCounter !== 0) {
     logoPhoto.src = "Media/you-lose.jpg";
 
     logoText.innerText =
-      "You lost because you rested the game after you start playing it";
+      "You lost because you reset the game after you start playing it";
   }
   wrongPairsCounter = 0;
   numberOfMistakes.innerText = 0;
@@ -202,6 +204,7 @@ resetButton.addEventListener("click", (event) => {
   bodyWelcome.style.display = "block";
   bodyGame.style.display = "none";
   gameClass.style.display = "none";
+
   playAgainButton.style.display = "block";
 });
 
@@ -231,7 +234,7 @@ const theGame = (shuffledImages) => {
   body.append(preventClicks);
   setTimeout(() => {
     body.removeChild(preventClicks);
-  }, 510); //! prevent clicks at the game start for 3s, need to edit the animation when updating this duration.
+  }, 510); //! prevent clicks at the game start for number of seconds, you need to edit the animation duration when updating this.
 
   for (let i = 0; i < shuffledImages.length; i++) {
     const imageDiv = document.createElement("div");
@@ -263,7 +266,7 @@ const theGame = (shuffledImages) => {
         if (wrongPairsCounter === wrongAttempts) {
           console.log("LOST");
           wrongPairsCounter = 0;
-          // numberOfMistakes.innerText = 0;
+          numberOfMistakes.innerText = 0;
           bodyWelcome.style.display = "block";
           bodyGame.style.display = "none";
           gameClass.style.display = "none";
@@ -287,7 +290,7 @@ const theGame = (shuffledImages) => {
         if (correctPairsCounter === cardsNumber / 2) {
           console.log("WON");
           wrongPairsCounter = 0;
-          // numberOfMistakes.innerText = 0;
+          numberOfMistakes.innerText = 0;
           bodyWelcome.style.display = "block";
           bodyGame.style.display = "none";
           gameClass.style.display = "none";
