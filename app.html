@@ -22,11 +22,10 @@
 
     <div id="body-welcome">
       <main id="main-welcome">
-        <div id="logo" class="welcome-class">
-          <img src="Media/meraki-logo.jpg" alt="logo" />
+        <div id="logo" > <!-- class="welcome-class" -->
+          <img id="logo-photo" src="Media/meraki-logo.jpg" alt="logo" />
         </div>
-        <!--       <div id="main-right"> -->
-        <div class="welcome-text welcome-class">
+        <div class="welcome-text"> <!-- class="welcome-class" -->
           <h4>Welcome to The Memory Game</h4>
           <br />
           How to Play: <br />
@@ -70,7 +69,6 @@
             <option value="no-time">No time limit</option>
           </select>
         </div>
-        <!--  </div>-->
       </main>
     </div>
 
@@ -83,7 +81,14 @@
           <p id="motivation"></p>
         </div>
         <div id="game"></div>
-        <div id="hint"></div>
+        <div id="hint-div">
+          <div class="number-of-mistakes">
+            No. of mistakes is
+            <p id="number-of-mistakes"></p>
+          </div>
+          <br />
+          <button id="hint-button">HINT</button>
+        </div>
         <div id="start"></div>
       </main>
     </div>
@@ -94,23 +99,19 @@
 
     <footer id="footer">
       <div>
-        <audio id="music" loop controls>
-          <!-- autoplay muted -->
+        <audio id="music" loop autoplay muted controls>
+          <!-- loop autoplay muted -->
           <source src="Media/Canon in D - Pachelbel.mp3" type="audio/mpeg" />
-
           <a href="Media/Canon in D - Pachelbel.mp3"> Download audio </a>
         </audio>
-        <!--  <button id="mute-music">Mute</button>
-        -->
       </div>
-      <div>
+      <div class="game-class">
         <button id="reset-button" class="game-class">Reset</button>
       </div>
 
-      <div class="welcome-class">
+      <div > <!-- class="welcome-class" -->
         <button id="play-now-button">Play Now</button>
       </div>
-      <button id="see-result-button" class="game-class">See result</button>
     </footer>
 
     <script src="main.js"></script>

@@ -19,7 +19,7 @@ Main features:
 Extra features:
         # Choose the time limit and show the timer.
 (DONE)  # difficulty Number of cards.
-        # wrongAttempts to loss the game //! update wrongAttempts by DOM
+        # wrongAttempts to lost the game //! update wrongAttempts by DOM
 (DONE)  # Show the pics for 10s
 (Not yet)   or start the game immediately button.
 (DONE)  # Play music and stop button.
@@ -83,6 +83,8 @@ const welcomeClass = document.querySelector(".welcome-class");
 const music = document.querySelector("#music");
 const dark = document.querySelector("#dark");
 const logo = document.querySelector("#logo");
+const logoPhoto = document.querySelector("#logo-photo");
+
 const welcome = document.querySelector(".welcome-text");
 const number = document.querySelector("#number");
 const numberSelect = document.querySelector("#number-select");
@@ -97,7 +99,14 @@ const gameClass = document.querySelector(".game-class");
 const timer = document.querySelector("#timer");
 const motivation = document.querySelector("#motivation");
 const game = document.querySelector("#game");
-const hint = document.querySelector("#hint");
+const hintDiv = document.querySelector("#hint-div");
+const hintButton = document.querySelector("#hint-button");
+const numberOfMistakesDiv = document.querySelector(".number-of-mistakes");
+
+const numberOfMistakes = document.querySelector("#number-of-mistakes");
+numberOfMistakes.innerText = 0;
+numberOfMistakesDiv.append(numberOfMistakes);
+
 const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 //
@@ -114,17 +123,16 @@ numberSelect.addEventListener("change", (e) => {
 
 bodyWelcome.style.display = "block";
 bodyGame.style.display = "none";
-welcomeClass.style.display = "inherit";
+// welcomeClass.style.display = "inherit";
 gameClass.style.display = "none";
 
 const nextPage = (event, cardsNumber) => {
   if (bodyWelcome.style.display === "block") {
     bodyWelcome.style.display = "none";
     bodyGame.style.display = "block";
-    welcomeClass.style.display = "none"; //! not working for button and text, override.
+gameClass.style.display = "block";
+
     playNowButton.style.display = "none";
-    welcomeClass.style.display = "none";
-    gameClass.style.display = "block";
   }
 
   //* /////////////// cardsNumber slicedImages ////////////////////
@@ -141,6 +149,7 @@ const nextPage = (event, cardsNumber) => {
     return shuffledArray;
   };
 
+
   let shuffledImages = shuffle(slicedImages);
 
   theGame(shuffledImages);
@@ -155,10 +164,21 @@ const preventClicks = document.createElement("img");
 preventClicks.src = "Media/meraki-logo.jpg";
 preventClicks.id = "prevent-clicks";
 
+//* /////////////// resetButton ////////////////////
+
+resetButton.addEventListener("click", (e) => {
+  for (let i = 0; i < shuffledImages.length; i++) {
+    const imageDiv = document.querySelector(".image-div");
+    game.removeChild(imageDiv);
+  }
+  shuffledImages = shuffle(shuffledImages);
+  theGame();
+});
+
 //* /////////////// Music ////////////////////
 
-// let musicVol = document.getElementById("music");
-// musicVol.volume = 0.25; // to change the initial music volume level
+let musicVol = document.getElementById("music");
+musicVol.volume = 0.15; // to change the initial music volume level
 
 //* /////////////// motivation ////////////////////
 
@@ -172,13 +192,13 @@ const theGame = (shuffledImages) => {
   let userClick;
   let firstImage;
   let correctPairsCounter = 0;
-  let wrongAttempts = 5; //! user defined wrongAttempts
+  let wrongAttempts = 4; //! user defined wrongAttempts
   let wrongPairsCounter = 0;
 
   body.append(preventClicks);
   setTimeout(() => {
     body.removeChild(preventClicks);
-  }, 3010); //! prevent clicks at the game start for 3s, need to edit the animation when updating this duration.
+  }, 510); //! prevent clicks at the game start for 3s, need to edit the animation when updating this duration.
 
   for (let i = 0; i < shuffledImages.length; i++) {
     const imageDiv = document.createElement("div");
@@ -200,28 +220,39 @@ const theGame = (shuffledImages) => {
         userClick = e.target.id; // overlay 1 ID
       } else if (userClick !== e.target.id) {
         wrongPairsCounter++;
+        numberOfMistakes.innerText = wrongPairsCounter;
         console.log("Wrong:", wrongPairsCounter);
-        if (wrongPairsCounter === wrongAttempts) {
-          console.log("LOSS");
+        if (wrongPairsCounter % 3 === 0) {
+          hintButton.style.display = "flex";
+        } else {
+          hintButton.style.display = "none";
         }
-        body.append(preventClicks); //! (solved) prevent clicks until setTimeout executed.
+        if (wrongPairsCounter === wrongAttempts) {
+          console.log("LOST");
+
+          bodyWelcome.style.display = "block";
+          bodyGame.style.display = "none";
+          gameClass.style.display = "none";
+          logoPhoto.src = "Media/you-lose.jpg"
+          playNowButton.style.display = "inherit";
+          playNowButton.innerText = "Play Again"
+
+        }
+        body.append(preventClicks);
         setTimeout(() => {
           body.removeChild(preventClicks);
           overlay.style.zIndex = 1;
           firstImage.style.zIndex = 1;
           userClick = undefined;
           firstImage = undefined;
-        }, 3000);
-
-        // overlay.style.animation = "flip-back-after-wrong-answer 3s";
-        // firstImage.style.animation = "flip-back-after-wrong-answer 3s"; //! (another sol. found) only works 1 time.
+        }, 500);
       } else if (userClick === e.target.id) {
         console.log("correct");
         correctPairsCounter++;
         userClick = undefined;
         firstImage = undefined;
         if (correctPairsCounter === cardsNumber / 2) {
-          console.log("WIN");
+          console.log("WON");
         }
       }
     });
@@ -230,14 +261,4 @@ const theGame = (shuffledImages) => {
   }
 };
 
-//* /////////////// resetButton ////////////////////
 
-resetButton.addEventListener("click", (e) => {
-  for (let i = 0; i < shuffledImages.length; i++) {
-    const imageDiv = document.querySelector(".image-div");
-    // const overlay = document.querySelector(".overlay")
-    game.removeChild(imageDiv);
-  }
-  shuffledImages = shuffle(shuffledImages);
-  theGame();
-});
