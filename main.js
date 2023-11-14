@@ -72,7 +72,7 @@ const images = [
 //
 //
 
-const body = document.querySelector("body");
+const body = document.querySelector("#body");
 const header = document.querySelector("#header");
 const footer = document.querySelector("#footer");
 //
@@ -236,6 +236,14 @@ preventClicks.id = "prevent-clicks";
 
 let musicVol = document.getElementById("music");
 musicVol.volume = 0.1; // to change the initial music volume level
+
+//* /////////////// Dark theme ////////////////////
+
+const darkFunction = () => {
+  body.style.backgroundColor = "rgb(65, 65, 65)";
+  body.style.color = "rgb(250, 250, 250)";
+};
+dark.addEventListener("click", darkFunction);
 
 //* /////////////// motivation ////////////////////
 

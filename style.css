@@ -7,6 +7,9 @@ body {
   margin: 15px;
   padding: 5px;
   position: relative;
+  background-color: rgb(250, 250, 250);
+  color: rgb(65, 65, 65);
+  /* height:720px; */
 }
 #body-welcome {
   /* display: block; */
@@ -21,7 +24,7 @@ body {
   display: grid;
   grid-template: 1fr / 1fr 4fr 1fr;
   gap: 10px;
-  text-align:left;
+  text-align: left;
 }
 #main-welcome {
   display: grid;
@@ -32,7 +35,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-text-align: center;}
+  text-align: center;
+}
 #logo img {
   margin: 20px;
   max-width: 200px;
@@ -84,13 +88,14 @@ text-align: center;}
   display: flex;
   flex-wrap: wrap;
   gap: 1%;
-  margin: 20px 0px;
-  justify-content:center;
-  align-items:center;
+  margin: 2% 0px;
+  height: 21%;
+  justify-content: center;
+  align-items: center;
 }
 #game img {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 /* 
 #game .image {
@@ -104,9 +109,12 @@ text-align: center;}
 #game .overlay {
 }*/
 .image-div {
-  width: 15.66667%; /* 100 / 6 images per line related to flex game div*/
+  display: flex;
+  width: 15.66667%; /* 100/6 = 16.67-1%gap images per line related to flex game div*/
+  /* height: 100%; */
   position: relative;
   border: 2px solid black;
+
 }
 .overlay {
   position: absolute;
@@ -154,20 +162,19 @@ text-align: center;}
 #hint-div {
   grid-area: 1 / 3 / 2 / 4;
   display: flex;
-flex-direction: column;
+  flex-direction: column;
   margin: 15px;
 }
 .number-of-mistakes {
-
-border: 1px black solid;
-text-align: center;
+  border: 1px black solid;
+  text-align: center;
 }
-button{
+button {
   padding: 5px;
 }
 #hint-button {
-display: none;
-justify-content: center;
+  display: none;
+  justify-content: center;
 }
 #start {
   grid-area: 2 / 3 / 3 / 4;
