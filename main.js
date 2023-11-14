@@ -103,18 +103,16 @@ const game = document.querySelector("#game");
 const hintDiv = document.querySelector("#hint-div");
 const hintButton = document.querySelector("#hint-button");
 const numberOfMistakesDiv = document.querySelector(".number-of-mistakes");
-
 const numberOfMistakes = document.querySelector("#number-of-mistakes");
-numberOfMistakes.innerText = 0;
-numberOfMistakesDiv.append(numberOfMistakes);
-
 const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 //
 //
 //* /////////////// Welcome page eventListener ////////////////////
 
-let cardsNumber = 12; //! 12 is the selected default value, need to change it here with the HTML select tag.
+let cardsNumber = 8; //! 8 is the selected default value, need to change it here with the HTML select tag.
+numberOfMistakes.innerText = 0;
+numberOfMistakesDiv.append(numberOfMistakes);
 
 numberSelect.addEventListener("change", (e) => {
   cardsNumber = e.target.value;
@@ -140,7 +138,7 @@ const shuffle = (array) => {
 };
 //* /////////////// When you press (Play Now)  ////////////////////
 
-const nextPage = (event, cardsNumber) => {
+const playTheGame = (event, cardsNumber) => {
   if (bodyWelcome.style.display === "block") {
     bodyWelcome.style.display = "none";
     bodyGame.style.display = "block";
@@ -153,23 +151,13 @@ const nextPage = (event, cardsNumber) => {
 
   let slicedImages = images.slice(0, cardsNumber);
 
-/*   const shuffle = (array) => {
-    let shuffledArray = [];
-    for (let i = array.length; i > 0; i--) {
-      let randomIndex = Math.floor(Math.random() * array.length);
-      shuffledArray.push(array[randomIndex]);
-      array.splice(randomIndex, 1);
-    }
-    return shuffledArray;
-  }; */
-
   shuffledImages = shuffle(slicedImages);
 
   theGame(shuffledImages);
 };
 
 playNowButton.addEventListener("click", (event) => {
-  nextPage(event, cardsNumber);
+  playTheGame(event, cardsNumber);
 });
 
 playAgainButton.addEventListener("click", (event) => {
@@ -178,18 +166,27 @@ playAgainButton.addEventListener("click", (event) => {
     game.removeChild(imageDiv);
   }
   shuffledImages = shuffle(shuffledImages);
-  nextPage(event, cardsNumber);
+  playTheGame(event, cardsNumber);
 });
 
 //* /////////////// resetButton ////////////////////
 
-resetButton.addEventListener("click", (e) => {
-  for (let i = 0; i < shuffledImages.length; i++) {
+resetButton.addEventListener("click", (event) => {
+/*   for (let i = 0; i < shuffledImages.length; i++) {
     const imageDiv = document.querySelector(".image-div");
     game.removeChild(imageDiv);
   }
   shuffledImages = shuffle(shuffledImages);
-  theGame();
+  numberOfMistakes.innerText = 0;
+  hintButton.style.display = "none";
+  playTheGame(event, cardsNumber);
+ */
+// if(numberOfMistakes.innerText !== 0 || )
+  numberOfMistakes.innerText = 0;
+  bodyWelcome.style.display = "block";
+  bodyGame.style.display = "none";
+  gameClass.style.display = "none";
+  playAgainButton.style.display = "block";
 });
 
 //* /////////////// preventClicks ////////////////////
@@ -273,6 +270,7 @@ const theGame = (shuffledImages) => {
         firstImage = undefined;
         if (correctPairsCounter === cardsNumber / 2) {
           console.log("WON");
+          numberOfMistakes.innerText = 0;
           bodyWelcome.style.display = "block";
           bodyGame.style.display = "none";
           gameClass.style.display = "none";
