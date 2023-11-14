@@ -88,8 +88,10 @@ const logoText = document.querySelector("#logo-text");
 const welcome = document.querySelector(".welcome-text");
 const number = document.querySelector("#number");
 const numberSelect = document.querySelector("#number-select");
-const difficulty = document.querySelector("#difficulty"); //! wrongAttempts in the game
+const difficulty = document.querySelector("#difficulty");
+const difficultySelect = document.querySelector("#difficulty-select");
 const time = document.querySelector("#time");
+const timeSelect = document.querySelector("#time-select");
 const playNowButton = document.querySelector("#play-now-button");
 const playAgainButton = document.querySelector("#play-again-button");
 //
@@ -113,16 +115,21 @@ const resetButton = document.querySelector("#reset-button");
 let cardsNumber = 8; //! 8 is the selected default value, need to change it here with the HTML select tag.
 let wrongPairsCounter = 0;
 let correctPairsCounter = 0;
+let wrongAttempts = 5; //! user defined wrongAttempts
 numberOfMistakes.innerText = 0;
 numberOfMistakesDiv.append(numberOfMistakes);
 
 numberSelect.addEventListener("change", (e) => {
   cardsNumber = e.target.value;
 });
+difficultySelect.addEventListener("change", (e) => {
+  wrongAttempts = Number(e.target.value);
+  // wrongAttempts = e.target.value;
+  // console.log(typeof wrongAttempts, wrongAttempts);
+});
 
 bodyWelcome.style.display = "block";
 bodyGame.style.display = "none";
-// welcomeClass.style.display = "inherit";
 gameClass.style.display = "none";
 playAgainButton.style.display = "none";
 
@@ -140,7 +147,7 @@ const shuffle = (array) => {
 };
 //* /////////////// When you press (Play Now)  ////////////////////
 
-const playTheGame = (event, cardsNumber) => {
+const playTheGame = (event, cardsNumber, wrongAttempts) => {
   if (bodyWelcome.style.display === "block") {
     bodyWelcome.style.display = "none";
     bodyGame.style.display = "block";
@@ -155,11 +162,11 @@ const playTheGame = (event, cardsNumber) => {
 
   shuffledImages = shuffle(slicedImages);
 
-  theGame(shuffledImages);
+  theGame(shuffledImages, wrongAttempts);
 };
 
 playNowButton.addEventListener("click", (event) => {
-  playTheGame(event, cardsNumber);
+  playTheGame(event, cardsNumber, wrongAttempts);
 });
 
 playAgainButton.addEventListener("click", (event) => {
@@ -168,7 +175,7 @@ playAgainButton.addEventListener("click", (event) => {
     game.removeChild(imageDiv);
   }
   shuffledImages = shuffle(shuffledImages);
-  playTheGame(event, cardsNumber);
+  playTheGame(event, cardsNumber, wrongAttempts);
 });
 
 //* /////////////// resetButton ////////////////////
@@ -181,15 +188,6 @@ resetButton.addEventListener("hover", (event) => {
 });
 
 resetButton.addEventListener("click", (event) => {
-  /*   for (let i = 0; i < shuffledImages.length; i++) {
-    const imageDiv = document.querySelector(".image-div");
-    game.removeChild(imageDiv);
-  }
-  shuffledImages = shuffle(shuffledImages);
-  numberOfMistakes.innerText = 0;
-  hintButton.style.display = "none";
-  playTheGame(event, cardsNumber);
- */
   logoPhoto.src = "Media/meraki-logo.jpg";
   logoText.innerText = "";
   if (wrongPairsCounter !== 0 || correctPairsCounter !== 0) {
@@ -216,7 +214,7 @@ preventClicks.id = "prevent-clicks";
 //* /////////////// Music ////////////////////
 
 let musicVol = document.getElementById("music");
-musicVol.volume = 0.15; // to change the initial music volume level
+musicVol.volume = 0.1; // to change the initial music volume level
 
 //* /////////////// motivation ////////////////////
 
@@ -226,11 +224,10 @@ mainIndex.append(motivation);
 
 //* /////////////// THE GAME ////////////////////
 
-const theGame = (shuffledImages) => {
+const theGame = (shuffledImages, wrongAttemptsInGame) => {
   let userClick;
   let firstImage;
-  let wrongAttempts = 4; //! user defined wrongAttempts
-
+  // console.log("wrongAttemptsInGame ", wrongAttemptsInGame);
   body.append(preventClicks);
   setTimeout(() => {
     body.removeChild(preventClicks);
@@ -263,7 +260,10 @@ const theGame = (shuffledImages) => {
         } else {
           hintButton.style.display = "none";
         }
-        if (wrongPairsCounter === wrongAttempts) {
+        // console.log(wrongPairsCounter == wrongAttemptsInGame);
+        // console.log(typeof wrongAttemptsInGame);
+        // console.log(typeof wrongPairsCounter);
+        if (wrongPairsCounter === wrongAttemptsInGame) {
           console.log("LOST");
           wrongPairsCounter = 0;
           numberOfMistakes.innerText = 0;
