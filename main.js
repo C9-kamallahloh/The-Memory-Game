@@ -25,7 +25,7 @@ Extra features:
 (DONE)  # Play music and stop button.
 (DONE)  # Reset button and shuffle again.
 (button added, concept not yet) # Hint button and give hint after 3 mistakes. 
-        # Dark theme.
+(DONE)  # Dark theme.
         # motivational sentences.
 (DONE)  # shift the images to the center of the screen
         # local storage save progress 
@@ -82,6 +82,7 @@ const mainWelcome = document.querySelector("#main-welcome");
 const welcomeClass = document.querySelector(".welcome-class");
 const music = document.querySelector("#music");
 const dark = document.querySelector("#dark");
+const light = document.querySelector("#light");
 const logo = document.querySelector("#logo");
 const logoPhoto = document.querySelector("#logo-photo");
 const logoText = document.querySelector("#logo-text");
@@ -237,12 +238,24 @@ preventClicks.id = "prevent-clicks";
 let musicVol = document.getElementById("music");
 musicVol.volume = 0.1; // to change the initial music volume level
 
-//* /////////////// Dark theme ////////////////////
+//* /////////////// Light & Dark theme ////////////////////
 
+light.style.display = "none";
+const lightFunction = () => {
+  body.style.backgroundColor = "rgb(250, 250, 250)";
+  body.style.color = "rgb(65, 65, 65)";
+light.style.display = "none";
+dark.style.display = "block";
+
+};
 const darkFunction = () => {
   body.style.backgroundColor = "rgb(65, 65, 65)";
   body.style.color = "rgb(250, 250, 250)";
+light.style.display = "block";
+dark.style.display = "none";
 };
+
+light.addEventListener("click", lightFunction);
 dark.addEventListener("click", darkFunction);
 
 //* /////////////// motivation ////////////////////

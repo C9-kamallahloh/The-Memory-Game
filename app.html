@@ -10,12 +10,17 @@
   </head>
   <body id="body">
     <header id="header">
-      <h4>
-        MERAKI_Academy_Project_1 <br />
-        B06_Kamal Lahloh
-      </h4>
-      <h1>THE MEMORY GAME</h1>
-      <button id="dark">Dark Theme</button>
+      <div class="header-left">
+        <h4>
+          MERAKI_Academy_Project_1 <br />
+          B06_Kamal Lahloh
+        </h4>
+      </div>
+      <div class="header-center"><h1>THE MEMORY GAME</h1></div>
+      <div class="header-right">
+        <button id="dark">Dark Theme</button>
+        <button id="light">Light Theme</button>
+      </div>
     </header>
 
     <!-- ------------------------------------------------------------ -->
@@ -52,18 +57,23 @@
             <option value="16">16 Cards</option>
             <option value="14">14 Cards</option>
             <option value="12">12 Cards</option>
-            <option value="10"selected>10 Cards</option>
+            <option value="10" selected>10 Cards</option>
             <option value="8">8 Cards</option>
-            <option value="6" >6 Cards</option> 
+            <option value="6">6 Cards</option>
             <option value="4">4 Cards</option>
           </select>
         </div>
         <div id="difficulty" class="difficulty choices">
           <label for="difficulty">Difficulty:</label>
-          <select id="difficulty-select" name="difficulty" class="difficulty select">
+          <select
+            id="difficulty-select"
+            name="difficulty"
+            class="difficulty select"
+          >
             <option value="5">5 mistakes</option>
             <option value="20" selected>20 mistakes</option>
-            <option value="Number.POSITIVE_INFINITY">unlimited mistakes</option> <!-- "Number.POSITIVE_INFINITY" -->
+            <option value="Number.POSITIVE_INFINITY">unlimited mistakes</option>
+            <!-- "Number.POSITIVE_INFINITY" -->
           </select>
         </div>
         <div id="time" class="time choices">
@@ -90,7 +100,7 @@
           <div class="number-of-mistakes">
             No. of mistakes is
             <p id="number-of-mistakes"></p>
-            
+
             <p id="wrong-attempts-counter"></p>
           </div>
           <br />
