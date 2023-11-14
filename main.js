@@ -91,6 +91,7 @@ const numberSelect = document.querySelector("#number-select");
 const difficulty = document.querySelector("#difficulty"); //! wrongAttempts in the game
 const time = document.querySelector("#time");
 const playNowButton = document.querySelector("#play-now-button");
+const playAgainButton = document.querySelector("#play-again-button");
 //
 //
 const bodyGame = document.querySelector("#body-game");
@@ -119,27 +120,40 @@ numberSelect.addEventListener("change", (e) => {
   cardsNumber = e.target.value;
 });
 
-//* /////////////// Next Page ////////////////////
-
 bodyWelcome.style.display = "block";
 bodyGame.style.display = "none";
 // welcomeClass.style.display = "inherit";
 gameClass.style.display = "none";
+playAgainButton.style.display = "none";
+
+//* /////////////// shuffle function ////////////////////
+
+let shuffledImages = [];
+const shuffle = (array) => {
+  let shuffledArray = [];
+  for (let i = array.length; i > 0; i--) {
+    let randomIndex = Math.floor(Math.random() * array.length);
+    shuffledArray.push(array[randomIndex]);
+    array.splice(randomIndex, 1);
+  }
+  return shuffledArray;
+};
+//* /////////////// When you press (Play Now)  ////////////////////
 
 const nextPage = (event, cardsNumber) => {
   if (bodyWelcome.style.display === "block") {
     bodyWelcome.style.display = "none";
     bodyGame.style.display = "block";
-gameClass.style.display = "block";
-
+    gameClass.style.display = "block";
     playNowButton.style.display = "none";
+    playAgainButton.style.display = "none";
   }
 
-  //* /////////////// cardsNumber slicedImages ////////////////////
+  //* ///////////// cardsNumber slicedImages shuffle //////////////////
 
   let slicedImages = images.slice(0, cardsNumber);
 
-  const shuffle = (array) => {
+/*   const shuffle = (array) => {
     let shuffledArray = [];
     for (let i = array.length; i > 0; i--) {
       let randomIndex = Math.floor(Math.random() * array.length);
@@ -147,10 +161,9 @@ gameClass.style.display = "block";
       array.splice(randomIndex, 1);
     }
     return shuffledArray;
-  };
+  }; */
 
-
-  let shuffledImages = shuffle(slicedImages);
+  shuffledImages = shuffle(slicedImages);
 
   theGame(shuffledImages);
 };
@@ -159,10 +172,14 @@ playNowButton.addEventListener("click", (event) => {
   nextPage(event, cardsNumber);
 });
 
-//* /////////////// preventClicks ////////////////////
-const preventClicks = document.createElement("img");
-preventClicks.src = "Media/meraki-logo.jpg";
-preventClicks.id = "prevent-clicks";
+playAgainButton.addEventListener("click", (event) => {
+  for (let i = 0; i < shuffledImages.length; i++) {
+    const imageDiv = document.querySelector(".image-div");
+    game.removeChild(imageDiv);
+  }
+  shuffledImages = shuffle(shuffledImages);
+  nextPage(event, cardsNumber);
+});
 
 //* /////////////// resetButton ////////////////////
 
@@ -174,6 +191,11 @@ resetButton.addEventListener("click", (e) => {
   shuffledImages = shuffle(shuffledImages);
   theGame();
 });
+
+//* /////////////// preventClicks ////////////////////
+const preventClicks = document.createElement("img");
+preventClicks.src = "Media/meraki-logo.jpg";
+preventClicks.id = "prevent-clicks";
 
 //* /////////////// Music ////////////////////
 
@@ -229,14 +251,12 @@ const theGame = (shuffledImages) => {
         }
         if (wrongPairsCounter === wrongAttempts) {
           console.log("LOST");
-
+          numberOfMistakes.innerText = 0;
           bodyWelcome.style.display = "block";
           bodyGame.style.display = "none";
           gameClass.style.display = "none";
-          logoPhoto.src = "Media/you-lose.jpg"
-          playNowButton.style.display = "inherit";
-          playNowButton.innerText = "Play Again"
-
+          logoPhoto.src = "Media/you-lose.jpg";
+          playAgainButton.style.display = "block";
         }
         body.append(preventClicks);
         setTimeout(() => {
@@ -253,6 +273,11 @@ const theGame = (shuffledImages) => {
         firstImage = undefined;
         if (correctPairsCounter === cardsNumber / 2) {
           console.log("WON");
+          bodyWelcome.style.display = "block";
+          bodyGame.style.display = "none";
+          gameClass.style.display = "none";
+          logoPhoto.src = "Media/you-win.jpg";
+          playAgainButton.style.display = "block";
         }
       }
     });
@@ -260,5 +285,3 @@ const theGame = (shuffledImages) => {
     game.append(imageDiv);
   }
 };
-
-
