@@ -80,7 +80,6 @@ const footer = document.querySelector("#footer");
 const bodyWelcome = document.querySelector("#body-welcome");
 const mainWelcome = document.querySelector("#main-welcome");
 const welcomeClass = document.querySelector(".welcome-class");
-const music = document.querySelector("#music");
 const dark = document.querySelector("#dark");
 const light = document.querySelector("#light");
 const logo = document.querySelector("#logo");
@@ -110,7 +109,11 @@ const hintButton = document.querySelector("#hint-button");
 const numberOfMistakesDiv = document.querySelector(".number-of-mistakes");
 const numberOfMistakes = document.querySelector("#number-of-mistakes");
 const wrongAttemptsCounter = document.querySelector("#wrong-attempts-counter");
-
+const music = document.querySelector("#music");
+const soundCorrect = document.querySelector("#sound-correct");
+const soundWrong = document.querySelector("#sound-wrong");
+const soundWin = document.querySelector("#sound-win");
+const soundLose = document.querySelector("#sound-lose");
 const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 const resetWarning = document.querySelector("#reset-warning");
@@ -266,7 +269,11 @@ preventClicks.id = "prevent-clicks";
 //* /////////////// Music ////////////////////
 
 let musicVol = document.getElementById("music");
-musicVol.volume = 0.1; // to change the initial music volume level
+musicVol.volume = 0.05; // to change the initial music volume level
+soundCorrect.volume = 0.01;
+soundWrong.volume = 0.01;
+soundWin.volume = 0.01;
+soundLose.volume = 0.01;
 
 //* /////////////// Light & Dark theme ////////////////////
 
@@ -491,6 +498,11 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
     image.src = shuffledImages[i].src;
 
     overlay.addEventListener("click", (e) => {
+      soundCorrect.load();
+      soundWrong.load();
+      soundWin.load();
+      soundLose.load();
+
       overlay.style.zIndex = -1;
       if (userClick === undefined) {
         firstImage = e.target; // overlay 1 tag
@@ -500,6 +512,8 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
         numberOfMistakes.innerText = wrongPairsCounter;
         console.log("Wrong:", wrongPairsCounter);
         motivationalWrongRandom();
+        soundWrong.play();
+
         if (wrongPairsCounter % 3 === 0) {
           hintButton.style.display = "flex";
         } else {
@@ -511,6 +525,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
         if (wrongPairsCounter === wrongAttemptsInGame) {
           console.log("LOST");
           loses++;
+          soundLose.play();
           localStorage.setItem("loses", loses);
           winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
           wrongPairsCounter = 0;
@@ -535,11 +550,13 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
         correctPairsCounter++;
         console.log("Correct:", correctPairsCounter);
         motivationalCorrectRandom();
+        soundCorrect.play();
         userClick = undefined;
         firstImage = undefined;
         if (correctPairsCounter === cardsNumber / 2) {
           console.log("WON");
           wins++;
+          soundWin.play();
           localStorage.setItem("wins", wins);
           winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
           wrongPairsCounter = 0;
