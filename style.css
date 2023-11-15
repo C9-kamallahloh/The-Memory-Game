@@ -148,7 +148,7 @@ body {
     /* z-index: -1; */
   }
   100% {
-    opacity: 0.5; /* not 1 (for testing only) */
+    opacity: 0.5; /*! 1 -> 0.5 (for testing only) */
     /* z-index: 1; */
   }
 }
@@ -186,7 +186,7 @@ button {
   padding: 5px;
 }
 #hint-button {
-  display: none;
+  display: flex; /* ! display: none -> flex for testing /////////// */
   justify-content: center;
 }
 #start {

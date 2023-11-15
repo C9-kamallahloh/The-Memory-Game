@@ -1,9 +1,11 @@
+// localStorage.clear();
+
 /* 
 todo: Main features (DONE):
 
 (DONE)  # Shuffle, and reshuffle after reset.
 
-(DONE) # change the cardsNumber to the specific    number cards needed in the game.
+(DONE)  # change the cardsNumber to the specific    number cards needed in the game.
 
 (DONE)  # Cards will appear for period of time (Ex.5 seconds) then it will flip to the other side. // (solved) still can play it during that
 
@@ -17,18 +19,18 @@ todo: Main features (DONE):
 
 /* 
 Extra features:
-        # Choose the time limit and show the timer.
 (DONE)  # difficulty Number of cards.
 (DONE)  # wrongAttempts to lost the game
 (DONE)  # Show the pics for a number of seconds ex.5s
-(skipped)   or start the game immediately button.
+          (skipped) or start the game immediately button.
 (DONE)  # Play music and stop button.
 (DONE)  # Reset button and shuffle again.
-(button added, concept not yet) # Hint button and give hint after 3 mistakes. 
 (DONE)  # Dark theme.
-        # motivational sentences. fireworks and sounds.
+(DONE)  # motivational sentences. fireworks and sounds.
 (DONE)  # shift the images to the center of the screen
 (DONE)  # local storage save progress 
+        # Choose the time limit and show the timer.
+(button added, concept not yet) # Hint button and give hint after 3 mistakes. 
         # image.div 100/6 100/5 100/4
 
 */
@@ -265,6 +267,20 @@ resetButton.addEventListener("click", (event) => {
 const preventClicks = document.createElement("img");
 preventClicks.src = "Media/meraki-logo.jpg";
 preventClicks.id = "prevent-clicks";
+
+// ! /////////////// Hint button ////////////////////  working on it
+// // console.log(typeof overlay.id);
+// // let imageDivOriginalBoarder = imageDiv.style.border;
+// const hintFunction = () => {
+//   console.log("sssssssssss");
+//   imageDiv.style.border = "2px black solid";
+//   let randomHint = Math.floor((Math.random() * shuffledImages.length) / 2);
+//   if (Number(shuffledImages[randomHint].id) === randomHint) {
+//     imageDiv.style.border = "5px red solid";
+//   }
+// };
+// hintButton.addEventListener("click", hintFunction);
+
 
 //* /////////////// Music ////////////////////
 
@@ -513,12 +529,13 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
         console.log("Wrong:", wrongPairsCounter);
         motivationalWrongRandom();
         soundWrong.play();
-
-        if (wrongPairsCounter % 3 === 0) {
+        //! display: flex for testing //////////
+        /*         if (wrongPairsCounter % 3 === 0) {
           hintButton.style.display = "flex";
         } else {
           hintButton.style.display = "none";
-        }
+        } */
+
         // console.log(wrongPairsCounter == wrongAttemptsInGame);
         // console.log(typeof wrongAttemptsInGame);
         // console.log(typeof wrongPairsCounter);
