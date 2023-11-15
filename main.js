@@ -28,7 +28,7 @@ Extra features:
 (DONE)  # Dark theme.
         # motivational sentences. fireworks and sounds.
 (DONE)  # shift the images to the center of the screen
-        # local storage save progress 
+(DONE)  # local storage save progress 
         # image.div 100/6 100/5 100/4
 
 */
@@ -144,7 +144,7 @@ numberSelect.addEventListener("change", (e) => {
 });
 difficultySelect.addEventListener("change", (e) => {
   //the updated value of wrongAttempts.
-  
+
   wrongAttempts = Number(e.target.value);
   // wrongAttempts = e.target.value;
   // console.log(typeof wrongAttempts, wrongAttempts);
@@ -184,6 +184,7 @@ const playTheGame = (event, cardsNumber, wrongAttempts) => {
     gameClass.style.display = "block";
     playNowButton.style.display = "none";
     playAgainButton.style.display = "none";
+    motivation.innerText = "Good Luck";
   }
 
   //* ///////////// cardsNumber slicedImages shuffle //////////////////
@@ -232,7 +233,7 @@ resetButton.addEventListener("click", (event) => {
   bodyWelcome.style.display = "block";
   bodyGame.style.display = "none";
   gameClass.style.display = "none";
-
+  motivation.innerText = "Good Luck";
   playAgainButton.style.display = "block";
 });
 
@@ -267,9 +268,169 @@ dark.addEventListener("click", darkFunction);
 
 //* /////////////// motivation ////////////////////
 
-let motivationInnerText = "Good Luck";
-motivation.innerText = motivationInnerText;
+// motivation.innerText = "Good Luck";
 mainIndex.append(motivation);
+
+/* const motivational = [
+  {id: 0, quote: ""},
+  {id: 1, quote: ""},
+  {id: 2, quote: ""},
+  {id: 3, quote: ""},
+  {id: 4, quote: ""},
+  {id: 5, quote: ""},
+  {id: 6, quote: ""},
+  {id: 7, quote: ""},
+  {id: 8, quote: ""},
+  {id: 9, quote: ""},
+  {id: 10, quote: ""},
+  {id: 11, quote: ""},
+  {id: 12, quote: ""},
+  {id: 13, quote: ""},
+  {id: 14, quote: ""},
+  {id: 15, quote: ""},
+  {id: 16, quote: ""}
+] */
+
+const motivationalCorrect = [
+  { id: 0, quote: "Good job." },
+  { id: 1, quote: "Well played." },
+  { id: 2, quote: "Nice one." },
+  { id: 3, quote: "Continue! ;)" },
+  { id: 4, quote: "Wow!" },
+  { id: 5, quote: "Outstanding." },
+  { id: 6, quote: "You're so good." },
+  { id: 7, quote: "Incredible" },
+  { id: 8, quote: "Fantastic!" },
+  { id: 9, quote: "Now this is good work." },
+  { id: 10, quote: "You're doing this right." },
+  // { id: 11, quote: "" },
+  // { id: 12, quote: "" },
+  // { id: 13, quote: "" },
+  // { id: 14, quote: "" },
+  // { id: 15, quote: "" },
+  // { id: 16, quote: "" },
+];
+const motivationalCorrectRandom = () => {
+  const randomIndex = Math.floor(Math.random() * motivationalCorrect.length);
+
+  if (Math.floor(Math.random() * 2)) {
+    motivation.innerText = motivationalCorrect[randomIndex].quote;
+  } else {
+    motivation.innerText = "";
+  }
+};
+
+const motivationalWrong = [
+  { id: 0, quote: "Do it again." },
+  { id: 1, quote: "You can do it." },
+  { id: 2, quote: "I Know you are better than this" },
+  { id: 3, quote: "Focus!" },
+  { id: 4, quote: "Need a hint?" },
+  { id: 5, quote: "Try another one." },
+  { id: 6, quote: "Remember these cards for later use." },
+  { id: 7, quote: "This is not the end of the game." },
+  // { id: 8, quote: "" },
+  // { id: 9, quote: "" },
+  // { id: 10, quote: "" },
+  // { id: 11, quote: "" },
+  // { id: 12, quote: "" },
+  // { id: 13, quote: "" },
+  // { id: 14, quote: "" },
+  // { id: 15, quote: "" },
+  // { id: 16, quote: "" },
+];
+const motivationalWrongRandom = () => {
+  const randomIndex = Math.floor(Math.random() * motivationalWrong.length);
+
+  if (Math.floor(Math.random() * 2)) {
+    motivation.innerText = motivationalWrong[randomIndex].quote;
+  } else {
+    motivation.innerText = "";
+  }
+};
+
+const motivationalCongrats = [
+  {
+    id: 0,
+    quote: "It is a rough road that leads to the heights of greatness.",
+  },
+  { id: 1, quote: "If you can dream it, you can do it." },
+  {
+    id: 2,
+    quote:
+      "Congratulations on your well-deserved success! You're an inspiration!",
+  },
+  { id: 3, quote: "You were born to win." },
+  { id: 4, quote: "Great deeds are usually wrought at great risks." },
+  {
+    id: 5,
+    quote: `Success… seems to be connected with action. Successful people keep moving. They make mistakes, but they don’t quit.`,
+  },
+  { id: 6, quote: "Congratulations! We're so very proud of you!" },
+  {
+    id: 7,
+    quote: "Your hard work and perseverance have paid off. Congratulations!",
+  },
+  {
+    id: 8,
+    quote: "Hard work. Dedication. Perseverance. You did it! Congratulations!",
+  },
+  { id: 9, quote: "You did it, grad! I knew you could!" },
+  { id: 10, quote: "Warmest congratulations on your achievement!" },
+  // { id: 11, quote: "" },
+  // { id: 12, quote: "" },
+  // { id: 13, quote: "" },
+  // { id: 14, quote: "" },
+  // { id: 15, quote: "" },
+  // { id: 16, quote: "" },
+];
+const motivationalCongratsRandom = () => {
+  const randomIndex = Math.floor(Math.random() * motivationalCongrats.length);
+  return motivationalCongrats[randomIndex].quote;
+};
+
+const motivationalTryAgain = [
+  { id: 0, quote: "Never give up! All you have to do is try again." },
+  {
+    id: 1,
+    quote:
+      "Ever tried. Ever failed. No matter. Try Again. Fail again. Fail better.",
+  },
+  { id: 2, quote: "Defeat happens only to those who refuse to try again." },
+  { id: 3, quote: "If at first you don't succeed, try, try, try again." },
+  { id: 4, quote: "Our greatest weakness lies in giving up." },
+  {
+    id: 5,
+    quote:
+      "I've failed over and over and over again in my life and that is why I succeed.",
+  },
+  {
+    id: 6,
+    quote: "When you lose, you get up, you make it better, you TRY AGAIN.",
+  },
+  { id: 7, quote: "When you fall, leap to your feet and try again." },
+  {
+    id: 8,
+    quote:
+      "The successful man will profit from his mistakes and try again in a different way.",
+  },
+  {
+    id: 9,
+    quote:
+      "Mistakes in life teach you how to succeed because you want to try again and do it better.",
+  },
+  // {id: 10, quote: ""},
+  // {id: 11, quote: ""},
+  // {id: 12, quote: ""},
+  // {id: 13, quote: ""},
+  // {id: 14, quote: ""},
+  // {id: 15, quote: ""},
+  // {id: 16, quote: ""}
+];
+const motivationalTryAgainRandom = () => {
+  const randomIndex = Math.floor(Math.random() * motivationalTryAgain.length);
+  return motivationalTryAgain[randomIndex].quote;
+};
 
 //* /////////////// THE GAME ////////////////////
 
@@ -304,6 +465,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
         wrongPairsCounter++;
         numberOfMistakes.innerText = wrongPairsCounter;
         console.log("Wrong:", wrongPairsCounter);
+        motivationalWrongRandom();
         if (wrongPairsCounter % 3 === 0) {
           hintButton.style.display = "flex";
         } else {
@@ -324,7 +486,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
           bodyGame.style.display = "none";
           gameClass.style.display = "none";
           logoPhoto.src = "Media/you-lose.jpg";
-          logoText.innerText = `Try Again, you can do better.`;
+          logoText.innerText = motivationalTryAgainRandom();
           playAgainButton.style.display = "block";
         }
         body.append(preventClicks);
@@ -338,6 +500,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
       } else if (userClick === e.target.id) {
         correctPairsCounter++;
         console.log("Correct:", correctPairsCounter);
+        motivationalCorrectRandom();
         userClick = undefined;
         firstImage = undefined;
         if (correctPairsCounter === cardsNumber / 2) {
@@ -352,7 +515,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
           bodyGame.style.display = "none";
           gameClass.style.display = "none";
           logoPhoto.src = "Media/you-win.jpg";
-          logoText.innerText = `Congrats!! you are Awesome.`;
+          logoText.innerText = motivationalCongratsRandom();
           playAgainButton.style.display = "block";
         }
       }
