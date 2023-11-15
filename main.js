@@ -115,32 +115,18 @@ const resetButton = document.querySelector("#reset-button");
 //
 //
 
-
-
 //* /////////////// Local storage ////////////////////
 
-let wins = 0;
-let loses = 0;
-
-
-
-// localStorage.setItem("wins", wins);
-// let winsLocalStorage = wins;
-
-
-
-// localStorage.setItem("loses", loses);
-
-// console.log(typeof localStorage.getItem("wins")); // string
+let wins = Number(localStorage.getItem("wins")) || 0;
+let loses = Number(localStorage.getItem("loses")) || 0;
 
 //* /////////////// Welcome page eventListener ////////////////////
-
 
 let cardsNumber = Number(numberSelect.value);
 // console.log(typeof cardsNumber, cardsNumber);
 let wrongPairsCounter = 0;
 let correctPairsCounter = 0;
-let wrongAttempts = Number(difficultySelect.value);
+let wrongAttempts = Number(difficultySelect.value); // the initial value of wrongAttempts.
 // console.log('wrongAttempts', typeof wrongAttempts)
 if (wrongAttempts >= 0) {
   wrongAttemptsCounter.innerText = ` of ${wrongAttempts}`;
@@ -157,6 +143,8 @@ numberSelect.addEventListener("change", (e) => {
   cardsNumber = e.target.value;
 });
 difficultySelect.addEventListener("change", (e) => {
+  //the updated value of wrongAttempts.
+  
   wrongAttempts = Number(e.target.value);
   // wrongAttempts = e.target.value;
   // console.log(typeof wrongAttempts, wrongAttempts);
@@ -327,12 +315,8 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
         if (wrongPairsCounter === wrongAttemptsInGame) {
           console.log("LOST");
           loses++;
-          // winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
-
-          winsLocalStorage = Number(localStorage.getItem("wins"));
-          winLose.innerText = `[ Wins = ${winsLocalStorage} , Loses = ${loses} ]`;
-
-
+          localStorage.setItem("loses", loses);
+          winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
           wrongPairsCounter = 0;
           numberOfMistakes.innerText = 0;
           correctPairsCounter = 0;
@@ -359,13 +343,8 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
         if (correctPairsCounter === cardsNumber / 2) {
           console.log("WON");
           wins++;
-
-          // winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
-          
           localStorage.setItem("wins", wins);
-          winsLocalStorage =Number(localStorage.getItem("wins"));
-          winLose.innerText = `[ Wins = ${winsLocalStorage} , Loses = ${loses} ]`;
-
+          winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
           wrongPairsCounter = 0;
           numberOfMistakes.innerText = 0;
           correctPairsCounter = 0;
