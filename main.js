@@ -114,19 +114,27 @@ const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
 //
 //
-//* /////////////// Welcome page eventListener ////////////////////
+
+
+
+//* /////////////// Local storage ////////////////////
 
 let wins = 0;
 let loses = 0;
-localStorage.setItem("wins", wins);
-let winsLocalStorage =Number(localStorage.getItem("wins"));
-console.log("sss",winsLocalStorage);
+
+
+
+// localStorage.setItem("wins", wins);
+// let winsLocalStorage = wins;
 
 
 
 // localStorage.setItem("loses", loses);
 
 // console.log(typeof localStorage.getItem("wins")); // string
+
+//* /////////////// Welcome page eventListener ////////////////////
+
 
 let cardsNumber = Number(numberSelect.value);
 // console.log(typeof cardsNumber, cardsNumber);
@@ -319,7 +327,11 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
         if (wrongPairsCounter === wrongAttemptsInGame) {
           console.log("LOST");
           loses++;
-          winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
+          // winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
+
+          winsLocalStorage = Number(localStorage.getItem("wins"));
+          winLose.innerText = `[ Wins = ${winsLocalStorage} , Loses = ${loses} ]`;
+
 
           wrongPairsCounter = 0;
           numberOfMistakes.innerText = 0;
@@ -347,11 +359,12 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
         if (correctPairsCounter === cardsNumber / 2) {
           console.log("WON");
           wins++;
-          winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
+
+          // winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
           
-          // localStorage.setItem("wins", wins);
-          // winsLocalStorage =Number(localStorage.getItem("wins"));
-          // winLose.innerText = `[ Wins = ${winsLocalStorage} , Loses = ${loses} ]`;
+          localStorage.setItem("wins", wins);
+          winsLocalStorage =Number(localStorage.getItem("wins"));
+          winLose.innerText = `[ Wins = ${winsLocalStorage} , Loses = ${loses} ]`;
 
           wrongPairsCounter = 0;
           numberOfMistakes.innerText = 0;
