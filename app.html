@@ -10,14 +10,14 @@
   </head>
   <body id="body">
     <header id="header">
-      <div class="header-left">
+      <div id="header-left">
         <h4>
           MERAKI_Academy_Project_1 <br />
           B06_Kamal Lahloh
         </h4>
       </div>
-      <div class="header-center"><h1>THE MEMORY GAME</h1></div>
-      <div class="header-right">
+      <div id="header-center"><h1>THE MEMORY GAME</h1></div>
+      <div id="header-right">
         <button id="dark">Dark Theme</button>
         <button id="light">Light Theme</button>
       </div>
@@ -31,6 +31,7 @@
       <main id="main-welcome">
         <div id="logo">
           <!-- class="welcome-class" -->
+          <p id="win-lose"></p>
           <img id="logo-photo" src="Media/meraki-logo.jpg" alt="logo" />
           <p id="logo-text"></p>
         </div>
@@ -70,10 +71,9 @@
             name="difficulty"
             class="difficulty select"
           >
-            <option value="5">5 mistakes</option>
-            <option value="20" selected>20 mistakes</option>
+            <option value="5" selected>5 mistakes</option>
+            <option value="20">20 mistakes</option>
             <option value="Number.POSITIVE_INFINITY">unlimited mistakes</option>
-            <!-- "Number.POSITIVE_INFINITY" -->
           </select>
         </div>
         <div id="time" class="time choices">

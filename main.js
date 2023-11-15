@@ -26,10 +26,10 @@ Extra features:
 (DONE)  # Reset button and shuffle again.
 (button added, concept not yet) # Hint button and give hint after 3 mistakes. 
 (DONE)  # Dark theme.
-        # motivational sentences.
+        # motivational sentences. fireworks and sounds.
 (DONE)  # shift the images to the center of the screen
         # local storage save progress 
-        # 
+        # image.div 100/6 100/5 100/4
 
 */
 
@@ -84,6 +84,7 @@ const music = document.querySelector("#music");
 const dark = document.querySelector("#dark");
 const light = document.querySelector("#light");
 const logo = document.querySelector("#logo");
+const winLose = document.querySelector("#win-lose");
 const logoPhoto = document.querySelector("#logo-photo");
 const logoText = document.querySelector("#logo-text");
 const welcome = document.querySelector(".welcome-text");
@@ -114,6 +115,18 @@ const resetButton = document.querySelector("#reset-button");
 //
 //
 //* /////////////// Welcome page eventListener ////////////////////
+
+let wins = 0;
+let loses = 0;
+localStorage.setItem("wins", wins);
+let winsLocalStorage =Number(localStorage.getItem("wins"));
+console.log("sss",winsLocalStorage);
+
+
+
+// localStorage.setItem("loses", loses);
+
+// console.log(typeof localStorage.getItem("wins")); // string
 
 let cardsNumber = Number(numberSelect.value);
 // console.log(typeof cardsNumber, cardsNumber);
@@ -154,7 +167,6 @@ bodyWelcome.style.display = "block";
 bodyGame.style.display = "none";
 gameClass.style.display = "none";
 playAgainButton.style.display = "none";
-
 //* /////////////// shuffle function ////////////////////
 
 let shuffledImages = [];
@@ -244,15 +256,14 @@ light.style.display = "none";
 const lightFunction = () => {
   body.style.backgroundColor = "rgb(250, 250, 250)";
   body.style.color = "rgb(65, 65, 65)";
-light.style.display = "none";
-dark.style.display = "block";
-
+  light.style.display = "none";
+  dark.style.display = "block";
 };
 const darkFunction = () => {
   body.style.backgroundColor = "rgb(65, 65, 65)";
   body.style.color = "rgb(250, 250, 250)";
-light.style.display = "block";
-dark.style.display = "none";
+  light.style.display = "block";
+  dark.style.display = "none";
 };
 
 light.addEventListener("click", lightFunction);
@@ -307,8 +318,12 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
         // console.log(typeof wrongPairsCounter);
         if (wrongPairsCounter === wrongAttemptsInGame) {
           console.log("LOST");
+          loses++;
+          winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
+
           wrongPairsCounter = 0;
           numberOfMistakes.innerText = 0;
+          correctPairsCounter = 0;
           bodyWelcome.style.display = "block";
           bodyGame.style.display = "none";
           gameClass.style.display = "none";
@@ -325,14 +340,22 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
           firstImage = undefined;
         }, 500);
       } else if (userClick === e.target.id) {
-        console.log("correct");
         correctPairsCounter++;
+        console.log("Correct:", correctPairsCounter);
         userClick = undefined;
         firstImage = undefined;
         if (correctPairsCounter === cardsNumber / 2) {
           console.log("WON");
+          wins++;
+          winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
+          
+          // localStorage.setItem("wins", wins);
+          // winsLocalStorage =Number(localStorage.getItem("wins"));
+          // winLose.innerText = `[ Wins = ${winsLocalStorage} , Loses = ${loses} ]`;
+
           wrongPairsCounter = 0;
           numberOfMistakes.innerText = 0;
+          correctPairsCounter = 0;
           bodyWelcome.style.display = "block";
           bodyGame.style.display = "none";
           gameClass.style.display = "none";
