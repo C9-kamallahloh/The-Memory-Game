@@ -79,8 +79,8 @@
         <div id="time" class="time choices">
           <label for="time">Time:</label>
           <select id="time-select" name="time" class="time select">
-            <option value="2-min">2 Minutes</option>
-            <option value="10-min" selected>10 Minutes</option>
+            <option value="5000" selected>2 Minutes</option> <!--value="120000" test for 5s -->
+            <option value="600000">10 Minutes</option>
             <option value="Number.POSITIVE_INFINITY">No time limit</option>
           </select>
         </div>
@@ -91,7 +91,9 @@
 
     <div id="body-game">
       <main id="main-index">
-        <div id="timer"></div>
+        <div id="timer">
+          <p id="timer-value"></p>
+        </div>
         <div>
           <p id="motivation"></p>
         </div>
@@ -122,6 +124,7 @@
           <a href="Media/Canon in D - Pachelbel.mp3"> Download audio </a>
         </audio>
       </div>
+      <p id="reset-warning"></p>
       <div>
         <!-- class="welcome-class" -->
         <button id="reset-button" class="game-class">Reset</button>

@@ -102,6 +102,7 @@ const bodyGame = document.querySelector("#body-game");
 const mainIndex = document.querySelector("#main-index");
 const gameClass = document.querySelector(".game-class");
 const timer = document.querySelector("#timer");
+const timerValue = document.querySelector("#timer-value");
 const motivation = document.querySelector("#motivation");
 const game = document.querySelector("#game");
 const hintDiv = document.querySelector("#hint-div");
@@ -112,6 +113,7 @@ const wrongAttemptsCounter = document.querySelector("#wrong-attempts-counter");
 
 const start = document.querySelector("#start");
 const resetButton = document.querySelector("#reset-button");
+const resetWarning = document.querySelector("#reset-warning");
 //
 //
 
@@ -211,11 +213,30 @@ playAgainButton.addEventListener("click", (event) => {
 
 //* /////////////// resetButton ////////////////////
 
-resetButton.addEventListener("hover", (event) => {
-  resetButton.style.color = "red";
+let buttonOriginalColor = resetButton.style.color;
+let buttonOriginalBackgroundColor = resetButton.style.backgroundColor;
+let buttonOriginalBorder = resetButton.style.border;
 
+resetButton.addEventListener("mouseover", (event) => {
   if (wrongPairsCounter !== 0 || correctPairsCounter !== 0) {
+    // let buttonOriginalColor = resetButton.style.color;
+    resetButton.style.color = "white";
+    resetButton.style.backgroundColor = "rgb(240, 80, 80)";
+    resetButton.style.border = "2px solid rgb(240, 80, 80)";
+    /*   setTimeout(() => {
+    resetButton.style.color = buttonOriginalColor;
+
+  }, 5000); */
+    resetWarning.innerText =
+      "since you already start playing, if you reset, you will lose the game.";
+    resetWarning.style.color = "rgb(240, 80, 80)";
   }
+});
+resetButton.addEventListener("mouseout", (event) => {
+  resetButton.style.color = buttonOriginalColor;
+  resetButton.style.backgroundColor = buttonOriginalBackgroundColor;
+  resetButton.style.border = buttonOriginalBorder;
+  resetWarning.innerText = "";
 });
 
 resetButton.addEventListener("click", (event) => {
@@ -265,6 +286,15 @@ const darkFunction = () => {
 
 light.addEventListener("click", lightFunction);
 dark.addEventListener("click", darkFunction);
+
+//* /////////////// Timer ////////////////////
+// const time = document.querySelector("#time");
+// const timeSelect = document.querySelector("#time-select");
+// const timer = document.querySelector("#timer");
+// const timerValue = document.querySelector("#timer-value");
+const mustFinishWithin = () => {};
+setTimeout(mustFinishWithin, Number(timeSelect.value) + 5000); //5000 the first 5s of the game to see the cards before flip.
+// console.log((Number(timeSelect.value)+5000));
 
 //* /////////////// motivation ////////////////////
 
@@ -412,7 +442,7 @@ const motivationalTryAgain = [
   {
     id: 8,
     quote:
-      "The successful man will profit from his mistakes and try again in a different way.",
+      "The successful person will profit from his mistakes and try again in a different way.",
   },
   {
     id: 9,
@@ -432,7 +462,11 @@ const motivationalTryAgainRandom = () => {
   return motivationalTryAgain[randomIndex].quote;
 };
 
-//* /////////////// THE GAME ////////////////////
+//* ///////////////////////////////////////////////////////
+//* ///////////////////////////////////////////////////////
+//* ///////////////////// THE GAME ////////////////////////
+//* ///////////////////////////////////////////////////////
+//* ///////////////////////////////////////////////////////
 
 const theGame = (shuffledImages, wrongAttemptsInGame) => {
   let userClick;
