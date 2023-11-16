@@ -390,12 +390,13 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
       soundWrong.load();
       soundWin.load();
       soundLose.load();
+      // console.log(e.target);
 
       overlay.style.zIndex = -1;
       if (userClick === undefined) {
         firstImage = e.target; // overlay 1 tag
-        userClick = e.target.id; // overlay 1 ID
-      } else if (userClick !== e.target.id) {
+        userClick = Number(Math.ceil(e.target.id/2)); // overlay 1 ID
+      } else if (userClick !== Number(Math.ceil(e.target.id/2))) {
         wrongPairsCounter++;
         numberOfMistakes.innerText = wrongPairsCounter;
         console.log("Wrong:", wrongPairsCounter);
@@ -435,7 +436,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
           userClick = undefined;
           firstImage = undefined;
         }, 500);
-      } else if (userClick === e.target.id) {
+      } else if (userClick === Number(Math.ceil(e.target.id/2))) {
         correctPairsCounter++;
         console.log("Correct:", correctPairsCounter);
         motivationalCorrectRandom();
