@@ -327,9 +327,33 @@ dark.addEventListener("click", darkFunction);
 // const timeSelect = document.querySelector("#time-select");
 // const timer = document.querySelector("#timer");
 // const timerValue = document.querySelector("#timer-value");
-const mustFinishWithin = () => {};
-setTimeout(mustFinishWithin, Number(timeSelect.value) + 5000); //5000 the first 5s of the game to see the cards before flip.
-// console.log((Number(timeSelect.value)+5000));
+
+timerValue.innerText = `Time limit = ${timeSelect.value/1000} sec`;
+
+// const mustFinishWithin = () => { //same as reset button
+
+
+//   logoPhoto.src = "Media/meraki-logo.jpg";
+//   logoText.innerText = "";
+//   if (wrongPairsCounter !== 0 || correctPairsCounter !== 0) {
+//     logoPhoto.src = "Media/you-lose.jpg";
+
+//     logoText.innerText =
+//       "You lost because you reset the game after you start playing it";
+//   }
+//   wrongPairsCounter = 0;
+//   numberOfMistakes.innerText = 0;
+//   correctPairsCounter = 0;
+//   bodyWelcome.style.display = "block";
+//   bodyGame.style.display = "none";
+//   gameClass.style.display = "none";
+//   motivation.innerText = "Good Luck";
+//   playAgainButton.style.display = "block";
+
+// };
+// setTimeout(mustFinishWithin, Number(timeSelect.value) + 5000); //5000 the first 5s of the game to see the cards before flip.
+
+
 
 //* ///////////////////////////////////////////////////////
 //* ///////////////////////////////////////////////////////
