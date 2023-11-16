@@ -108,6 +108,7 @@ const timerCountdown = document.querySelector("#timer-countdown");
 
 const motivation = document.querySelector("#motivation");
 const game = document.querySelector("#game");
+// const imageDivClass = document.querySelector(".image-div");
 const hintDiv = document.querySelector("#hint-div");
 const hintButton = document.querySelector("#hint-button");
 const numberOfMistakesDiv = document.querySelector(".number-of-mistakes");
@@ -254,7 +255,7 @@ const playTheGame = (event, cardsNumber, wrongAttempts) => {
     clearTimeout(setTimeoutCaller);
     clearInterval(setIntervalCaller);
     timerValue.innerText = "Unlimited time.";
-    timerCountdown.innerHTML = "Unlimited time."
+    timerCountdown.innerHTML = "Unlimited time.";
     if (timeLimit > 0) {
       setTimeoutCaller = setTimeout(mustFinishWithin, timeLimit + 5000); //5000 the first 5s of the game to see the cards before flip.
 
@@ -500,10 +501,30 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
     });
     imageDiv.append(image, overlay);
     game.append(imageDiv);
+
     hintButton.addEventListener("click", (e) => {
       hintFunction(shuffledImages, overlayIdArray, overlay);
     });
   }
+
+
+  //! (skipped) imageDivClass.style.width 
+  
+  // for (let i = 0; i < shuffledImages.length; i++) {
+  // const imageDivClass = document.querySelector(".image-div");
+  //   // console.log(imageDivClass);
+  //   // console.log(shuffledImages.length);
+  //   if (shuffledImages.length < 6) {
+  //     imageDivClass.style.width = "49%";
+  //   } else if (shuffledImages.length < 9) {
+  //     imageDivClass.style.width = "32.33333%";
+  //   } else if (shuffledImages.length < 16) {
+  //     // console.log("ssssssss");
+  //     imageDivClass.style.width = "24%";
+  //   } else if (shuffledImages.length < 20) {
+  //     imageDivClass.style.width = "19%";
+  //   }
+  // }
 };
 
 //* /////////////// motivation ////////////////////
