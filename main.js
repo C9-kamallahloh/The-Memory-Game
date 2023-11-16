@@ -104,6 +104,8 @@ const mainIndex = document.querySelector("#main-index");
 const gameClass = document.querySelector(".game-class");
 const timer = document.querySelector("#timer");
 const timerValue = document.querySelector("#timer-value");
+const timerCountdown = document.querySelector("#timer-countdown");
+
 const motivation = document.querySelector("#motivation");
 const game = document.querySelector("#game");
 const hintDiv = document.querySelector("#hint-div");
@@ -182,7 +184,52 @@ const shuffle = (array) => {
   }
   return shuffledArray;
 };
+
+
+//* /////////////// Timer ////////////////////
+
+// const time = document.querySelector("#time");
+// const timeSelect = document.querySelector("#time-select");
+// const timer = document.querySelector("#timer");
+// const timerValue = document.querySelector("#timer-value");
+// const timerCountdown = document.querySelector("#timer-countdown");
+
+// timerValue.innerText = `${timeSelect.value / 1000} sec`;
+timerValue.innerText = `${Math.floor((timeSelect.value / 1000)/60)} min : ${(timeSelect.value / 1000)%60} sec.`;
+
+
+const mustFinishWithin = () => {
+  //same as reset button
+
+  logoPhoto.src = "Media/meraki-logo.jpg";
+  logoText.innerText = "";
+  if (wrongPairsCounter !== 0 || correctPairsCounter !== 0) {
+    logoPhoto.src = "Media/you-lose.jpg";
+
+    logoText.innerText =
+      "Times up, try to be faster next time.";
+  }
+  wrongPairsCounter = 0;
+  numberOfMistakes.innerText = 0;
+  correctPairsCounter = 0;
+  bodyWelcome.style.display = "block";
+  bodyGame.style.display = "none";
+  gameClass.style.display = "none";
+  motivation.innerText = "Good Luck";
+  playAgainButton.style.display = "block";
+};
+
+
+let countdownInitialValue = 0;
+const timerCountdownFunction = () => {
+  timerCountdown.innerText = `${Math.floor((countdownInitialValue / 1000)/60)} min : ${(countdownInitialValue / 1000)%60} sec.`;
+
+  countdownInitialValue -= 1000;
+};
+
 //* /////////////// When you press (Play Now)  ////////////////////
+let setTimeoutCaller = 0
+let  setIntervalCaller = 0;
 
 const playTheGame = (event, cardsNumber, wrongAttempts) => {
   if (bodyWelcome.style.display === "block") {
@@ -192,6 +239,12 @@ const playTheGame = (event, cardsNumber, wrongAttempts) => {
     playNowButton.style.display = "none";
     playAgainButton.style.display = "none";
     motivation.innerText = "Good Luck";
+    // overlay.animationDuration= "5s"; 
+    countdownInitialValue = Number(timeSelect.value) + 5000; //! edit css overlay.animationDuration with this.
+    clearTimeout(setTimeoutCaller)
+    clearInterval(setIntervalCaller)
+    setTimeoutCaller = setTimeout(mustFinishWithin, Number(timeSelect.value) + 5000); //5000 the first 5s of the game to see the cards before flip.
+    setIntervalCaller =  setInterval(timerCountdownFunction, 1000);
   }
 
   //* ///////////// cardsNumber slicedImages shuffle //////////////////
@@ -322,39 +375,6 @@ const darkFunction = () => {
 light.addEventListener("click", lightFunction);
 dark.addEventListener("click", darkFunction);
 
-//* /////////////// Timer ////////////////////
-// const time = document.querySelector("#time");
-// const timeSelect = document.querySelector("#time-select");
-// const timer = document.querySelector("#timer");
-// const timerValue = document.querySelector("#timer-value");
-
-timerValue.innerText = `Time limit = ${timeSelect.value/1000} sec`;
-
-// const mustFinishWithin = () => { //same as reset button
-
-
-//   logoPhoto.src = "Media/meraki-logo.jpg";
-//   logoText.innerText = "";
-//   if (wrongPairsCounter !== 0 || correctPairsCounter !== 0) {
-//     logoPhoto.src = "Media/you-lose.jpg";
-
-//     logoText.innerText =
-//       "You lost because you reset the game after you start playing it";
-//   }
-//   wrongPairsCounter = 0;
-//   numberOfMistakes.innerText = 0;
-//   correctPairsCounter = 0;
-//   bodyWelcome.style.display = "block";
-//   bodyGame.style.display = "none";
-//   gameClass.style.display = "none";
-//   motivation.innerText = "Good Luck";
-//   playAgainButton.style.display = "block";
-
-// };
-// setTimeout(mustFinishWithin, Number(timeSelect.value) + 5000); //5000 the first 5s of the game to see the cards before flip.
-
-
-
 //* ///////////////////////////////////////////////////////
 //* ///////////////////////////////////////////////////////
 //* ///////////////////// THE GAME ////////////////////////
@@ -369,7 +389,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
   body.append(preventClicks);
   setTimeout(() => {
     body.removeChild(preventClicks);
-  }, 510); //! prevent clicks at the game start for number of seconds, you need to edit the animation duration when updating this.
+  }, 5010); //! prevent clicks at the game start for number of seconds, you need to edit the animation duration when updating this.
 
   for (let i = 0; i < shuffledImages.length; i++) {
     const imageDiv = document.createElement("div");
@@ -395,8 +415,8 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
       overlay.style.zIndex = -1;
       if (userClick === undefined) {
         firstImage = e.target; // overlay 1 tag
-        userClick = Number(Math.ceil(e.target.id/2)); // overlay 1 ID
-      } else if (userClick !== Number(Math.ceil(e.target.id/2))) {
+        userClick = Number(Math.ceil(e.target.id / 2)); // overlay 1 ID
+      } else if (userClick !== Number(Math.ceil(e.target.id / 2))) {
         wrongPairsCounter++;
         numberOfMistakes.innerText = wrongPairsCounter;
         console.log("Wrong:", wrongPairsCounter);
@@ -429,14 +449,16 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
           playAgainButton.style.display = "block";
         }
         body.append(preventClicks);
+        overlay.animationDuration= "1.5s"; //! prevent clicks duration
+
         setTimeout(() => {
           body.removeChild(preventClicks);
           overlay.style.zIndex = 1;
           firstImage.style.zIndex = 1;
           userClick = undefined;
           firstImage = undefined;
-        }, 500);
-      } else if (userClick === Number(Math.ceil(e.target.id/2))) {
+        }, 1500); //! prevent clicks when wrong for number of seconds, you need to edit the animation duration when updating this.
+      } else if (userClick === Number(Math.ceil(e.target.id / 2))) {
         correctPairsCounter++;
         console.log("Correct:", correctPairsCounter);
         motivationalCorrectRandom();

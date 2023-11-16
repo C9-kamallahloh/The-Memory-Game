@@ -135,7 +135,7 @@ body {
   top: 0;
   /*   opacity: 0.75; */
   animation-name: apply-overlay;
-  animation-duration: 0.5s;
+  animation-duration: 5s; /*! edit main.js playTheGame overlay.animationDuration with this. */
   animation-fill-mode: forwards;
 }
 @keyframes apply-overlay {
