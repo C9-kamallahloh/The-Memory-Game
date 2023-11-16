@@ -9,15 +9,8 @@ body {
   position: relative;
   background-color: rgb(250, 250, 250);
   color: rgb(65, 65, 65);
-  /* height:720px; */
 }
 
-#body-welcome {
-  /* display: block; */
-}
-#body-game {
-  /* display: none; */
-}
 #test {
   color: red;
 }
@@ -96,8 +89,6 @@ body {
 }
 #game {
   grid-area: 1 / 2 / 3 / 3;
-  /* display: grid; */
-  /* grid-template: repeat(4, 1fr) / repeat(6, 1fr); */
   display: flex;
   flex-wrap: wrap;
   gap: 1%;
@@ -108,32 +99,17 @@ body {
 }
 #game img {
   width: 100%;
-  /* height: 100%; */
 }
-/* 
-#game .image {
-  width: 100%;
-  height: auto;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-#game .overlay {
-}*/
 .image-div {
   display: flex;
   width: 15.66667%; /* 100/6 = 16.67-1%gap images per line related to flex game div*/
-  /* height: 100%; */
   position: relative;
   border: 2px solid black;
-
 }
 .overlay {
   position: absolute;
   left: 0;
   top: 0;
-  /*   opacity: 0.75; */
   animation-name: apply-overlay;
   animation-duration: 5s; /*! edit main.js playTheGame overlay.animationDuration with this. */
   animation-fill-mode: forwards;
@@ -141,28 +117,14 @@ body {
 @keyframes apply-overlay {
   0% {
     opacity: 0;
-    /* z-index: -1; */
   }
   99% {
     opacity: 0;
-    /* z-index: -1; */
   }
   100% {
-    opacity: 0.5; /*! 1 -> 0.5 (for testing only) */
-    /* z-index: 1; */
+    opacity: 1; /*! 1 -> 0.5 (for testing only) */
   }
 }
-/* @keyframes flip-back-after-wrong-answer {
-  0% {
-    opacity: 0;
-  }
-  99% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.75;
-  }
-} */
 #prevent-clicks {
   position: absolute;
   top: 0;
@@ -195,6 +157,4 @@ button {
 #footer {
   display: flex;
   justify-content: space-between;
-}
-#music {
 }

@@ -1,5 +1,6 @@
 // localStorage.clear();
 
+
 /* 
 todo: Main features (DONE):
 
@@ -29,9 +30,10 @@ Extra features:
 (DONE)  # motivational sentences. fireworks and sounds.
 (DONE)  # shift the images to the center of the screen
 (DONE)  # local storage save progress 
-        # Choose the time limit and show the timer.
+(DONE)  # Choose the time limit and show the timer.
 (button added, (skipped)) # Hint button and give hint after 3 mistakes. 
-        # image.div 100/6 100/5 100/4
+(skipped)  # image.div 100/6 100/5 100/4
+(skipped)  # expand the game height = window height.
 
 */
 
@@ -108,7 +110,6 @@ const timerCountdown = document.querySelector("#timer-countdown");
 
 const motivation = document.querySelector("#motivation");
 const game = document.querySelector("#game");
-// const imageDivClass = document.querySelector(".image-div");
 const hintDiv = document.querySelector("#hint-div");
 const hintButton = document.querySelector("#hint-button");
 const numberOfMistakesDiv = document.querySelector(".number-of-mistakes");
@@ -134,11 +135,9 @@ let loses = Number(localStorage.getItem("loses")) || 0;
 
 let timeLimit = Number(timeSelect.value);
 let cardsNumber = Number(numberSelect.value);
-// console.log(typeof cardsNumber, cardsNumber);
 let wrongPairsCounter = 0;
 let correctPairsCounter = 0;
 let wrongAttempts = Number(difficultySelect.value); // the initial value of wrongAttempts.
-// console.log('wrongAttempts', typeof wrongAttempts)
 if (wrongAttempts >= 0) {
   wrongAttemptsCounter.innerText = ` of ${wrongAttempts}`;
 } else {
@@ -158,9 +157,6 @@ difficultySelect.addEventListener("change", (e) => {
   //the updated value of wrongAttempts.
 
   wrongAttempts = Number(e.target.value);
-  // wrongAttempts = e.target.value;
-  // console.log(typeof wrongAttempts, wrongAttempts);
-
   if (wrongAttempts >= 0) {
     wrongAttemptsCounter.innerText = ` of ${wrongAttempts}`;
   } else {
@@ -172,10 +168,8 @@ timeSelect.addEventListener("change", (e) => {
   timeLimit = Number(e.target.value);
   if (timeLimit > 0) {
     timerValue.innerText = `${Math.floor(timeLimit / 1000 / 60)} min`;
-    // console.log("true",timerValue.innerText);
   } else {
     timerValue.innerText = `Unlimited time`;
-    // console.log("false",timerValue.innerText);
   }
 }); //! /////////////////////////////////////////
 //
@@ -200,13 +194,6 @@ const shuffle = (array) => {
 
 //* /////////////// Timer ////////////////////
 
-// const time = document.querySelector("#time");
-// const timeSelect = document.querySelector("#time-select");
-// const timer = document.querySelector("#timer");
-// const timerValue = document.querySelector("#timer-value");
-// const timerCountdown = document.querySelector("#timer-countdown");
-
-// timerValue.innerText = `${timeLimit / 1000} sec`;
 timerValue.innerText = `${Math.floor(timeLimit / 1000 / 60)} min`;
 
 const mustFinishWithin = () => {
@@ -250,11 +237,9 @@ const playTheGame = (event, cardsNumber, wrongAttempts) => {
     playNowButton.style.display = "none";
     playAgainButton.style.display = "none";
     motivation.innerText = "Good Luck";
-    // overlay.animationDuration= "5s";
     countdownInitialValue = timeLimit + 5000; //! edit css overlay.animationDuration with this.
     clearTimeout(setTimeoutCaller);
     clearInterval(setIntervalCaller);
-    timerValue.innerText = "Unlimited time.";
     timerCountdown.innerHTML = "Unlimited time.";
     if (timeLimit > 0) {
       setTimeoutCaller = setTimeout(mustFinishWithin, timeLimit + 5000); //5000 the first 5s of the game to see the cards before flip.
@@ -293,14 +278,9 @@ let buttonOriginalBorder = resetButton.style.border;
 
 resetButton.addEventListener("mouseover", (event) => {
   if (wrongPairsCounter !== 0 || correctPairsCounter !== 0) {
-    // let buttonOriginalColor = resetButton.style.color;
     resetButton.style.color = "white";
     resetButton.style.backgroundColor = "rgb(240, 80, 80)";
     resetButton.style.border = "2px solid rgb(240, 80, 80)";
-    /*   setTimeout(() => {
-    resetButton.style.color = buttonOriginalColor;
-
-  }, 5000); */
     resetWarning.innerText =
       "since you already start playing, if you reset, you will lose the game.";
     resetWarning.style.color = "rgb(240, 80, 80)";
@@ -401,7 +381,6 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
   let userClick;
   let firstImage;
   let overlayIdArray = [];
-  // console.log("wrongAttemptsInGame ", wrongAttemptsInGame);
   body.append(preventClicks);
   setTimeout(() => {
     body.removeChild(preventClicks);
@@ -426,7 +405,6 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
       soundWrong.load();
       soundWin.load();
       soundLose.load();
-      // console.log(e.target);
 
       overlay.style.zIndex = -1;
       if (userClick === undefined) {
@@ -529,7 +507,6 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
 
 //* /////////////// motivation ////////////////////
 
-// motivation.innerText = "Good Luck";
 mainIndex.append(motivation);
 
 /* const motivational = [
@@ -564,12 +541,6 @@ const motivationalCorrect = [
   { id: 8, quote: "Fantastic!" },
   { id: 9, quote: "Now this is good work." },
   { id: 10, quote: "You're doing this right." },
-  // { id: 11, quote: "" },
-  // { id: 12, quote: "" },
-  // { id: 13, quote: "" },
-  // { id: 14, quote: "" },
-  // { id: 15, quote: "" },
-  // { id: 16, quote: "" },
 ];
 const motivationalCorrectRandom = () => {
   const randomIndex = Math.floor(Math.random() * motivationalCorrect.length);
@@ -590,15 +561,6 @@ const motivationalWrong = [
   { id: 5, quote: "Try another one." },
   { id: 6, quote: "Remember these cards for later use." },
   { id: 7, quote: "This is not the end of the game." },
-  // { id: 8, quote: "" },
-  // { id: 9, quote: "" },
-  // { id: 10, quote: "" },
-  // { id: 11, quote: "" },
-  // { id: 12, quote: "" },
-  // { id: 13, quote: "" },
-  // { id: 14, quote: "" },
-  // { id: 15, quote: "" },
-  // { id: 16, quote: "" },
 ];
 const motivationalWrongRandom = () => {
   const randomIndex = Math.floor(Math.random() * motivationalWrong.length);
@@ -638,12 +600,6 @@ const motivationalCongrats = [
   },
   { id: 9, quote: "You did it, grad! I knew you could!" },
   { id: 10, quote: "Warmest congratulations on your achievement!" },
-  // { id: 11, quote: "" },
-  // { id: 12, quote: "" },
-  // { id: 13, quote: "" },
-  // { id: 14, quote: "" },
-  // { id: 15, quote: "" },
-  // { id: 16, quote: "" },
 ];
 const motivationalCongratsRandom = () => {
   const randomIndex = Math.floor(Math.random() * motivationalCongrats.length);
@@ -680,13 +636,6 @@ const motivationalTryAgain = [
     quote:
       "Mistakes in life teach you how to succeed because you want to try again and do it better.",
   },
-  // {id: 10, quote: ""},
-  // {id: 11, quote: ""},
-  // {id: 12, quote: ""},
-  // {id: 13, quote: ""},
-  // {id: 14, quote: ""},
-  // {id: 15, quote: ""},
-  // {id: 16, quote: ""}
 ];
 const motivationalTryAgainRandom = () => {
   const randomIndex = Math.floor(Math.random() * motivationalTryAgain.length);
