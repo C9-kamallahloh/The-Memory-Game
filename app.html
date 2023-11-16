@@ -80,9 +80,8 @@
           <label for="time">Time:</label>
           <select id="time-select" name="time" class="time select">
             <option value="120000" selected>2 Minutes</option>
-            <!-- ! value="120000" test for 5s -->
             <option value="600000">10 Minutes</option>
-            <option value="Number.POSITIVE_INFINITY">No time limit</option>
+            <option value="-100000">No time limit</option> <!-- value="Number.POSITIVE_INFINITY" -->
           </select>
         </div>
       </main>

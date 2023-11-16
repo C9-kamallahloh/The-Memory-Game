@@ -131,6 +131,7 @@ let loses = Number(localStorage.getItem("loses")) || 0;
 
 //* /////////////// Welcome page eventListener ////////////////////
 
+let timeLimit = Number(timeSelect.value);
 let cardsNumber = Number(numberSelect.value);
 // console.log(typeof cardsNumber, cardsNumber);
 let wrongPairsCounter = 0;
@@ -151,6 +152,7 @@ numberOfMistakesDiv.append(numberOfMistakes, wrongAttemptsCounter);
 numberSelect.addEventListener("change", (e) => {
   cardsNumber = e.target.value;
 });
+
 difficultySelect.addEventListener("change", (e) => {
   //the updated value of wrongAttempts.
 
@@ -165,6 +167,16 @@ difficultySelect.addEventListener("change", (e) => {
   }
 });
 
+timeSelect.addEventListener("change", (e) => {
+  timeLimit = Number(e.target.value);
+  if (timeLimit > 0) {
+    timerValue.innerText = `${Math.floor(timeLimit / 1000 / 60)} min`;
+    // console.log("true",timerValue.innerText);
+  } else {
+    timerValue.innerText = `Unlimited time`;
+    // console.log("false",timerValue.innerText);
+  }
+}); //! /////////////////////////////////////////
 //
 //
 
@@ -185,7 +197,6 @@ const shuffle = (array) => {
   return shuffledArray;
 };
 
-
 //* /////////////// Timer ////////////////////
 
 // const time = document.querySelector("#time");
@@ -194,9 +205,8 @@ const shuffle = (array) => {
 // const timerValue = document.querySelector("#timer-value");
 // const timerCountdown = document.querySelector("#timer-countdown");
 
-// timerValue.innerText = `${timeSelect.value / 1000} sec`;
-timerValue.innerText = `${Math.floor((timeSelect.value / 1000)/60)} min : ${(timeSelect.value / 1000)%60} sec.`;
-
+// timerValue.innerText = `${timeLimit / 1000} sec`;
+timerValue.innerText = `${Math.floor(timeLimit / 1000 / 60)} min`;
 
 const mustFinishWithin = () => {
   //same as reset button
@@ -206,8 +216,7 @@ const mustFinishWithin = () => {
   if (wrongPairsCounter !== 0 || correctPairsCounter !== 0) {
     logoPhoto.src = "Media/you-lose.jpg";
 
-    logoText.innerText =
-      "Times up, try to be faster next time.";
+    logoText.innerText = "Times up, try to be faster next time.";
   }
   wrongPairsCounter = 0;
   numberOfMistakes.innerText = 0;
@@ -219,17 +228,18 @@ const mustFinishWithin = () => {
   playAgainButton.style.display = "block";
 };
 
-
 let countdownInitialValue = 0;
 const timerCountdownFunction = () => {
-  timerCountdown.innerText = `${Math.floor((countdownInitialValue / 1000)/60)} min : ${(countdownInitialValue / 1000)%60} sec.`;
+  timerCountdown.innerText = `${Math.floor(
+    countdownInitialValue / 1000 / 60
+  )} min : ${(countdownInitialValue / 1000) % 60} sec.`;
 
   countdownInitialValue -= 1000;
 };
 
 //* /////////////// When you press (Play Now)  ////////////////////
-let setTimeoutCaller = 0
-let  setIntervalCaller = 0;
+let setTimeoutCaller = 0;
+let setIntervalCaller = 0;
 
 const playTheGame = (event, cardsNumber, wrongAttempts) => {
   if (bodyWelcome.style.display === "block") {
@@ -239,12 +249,17 @@ const playTheGame = (event, cardsNumber, wrongAttempts) => {
     playNowButton.style.display = "none";
     playAgainButton.style.display = "none";
     motivation.innerText = "Good Luck";
-    // overlay.animationDuration= "5s"; 
-    countdownInitialValue = Number(timeSelect.value) + 5000; //! edit css overlay.animationDuration with this.
-    clearTimeout(setTimeoutCaller)
-    clearInterval(setIntervalCaller)
-    setTimeoutCaller = setTimeout(mustFinishWithin, Number(timeSelect.value) + 5000); //5000 the first 5s of the game to see the cards before flip.
-    setIntervalCaller =  setInterval(timerCountdownFunction, 1000);
+    // overlay.animationDuration= "5s";
+    countdownInitialValue = timeLimit + 5000; //! edit css overlay.animationDuration with this.
+    clearTimeout(setTimeoutCaller);
+    clearInterval(setIntervalCaller);
+    timerValue.innerText = "Unlimited time.";
+    timerCountdown.innerHTML = "Unlimited time."
+    if (timeLimit > 0) {
+      setTimeoutCaller = setTimeout(mustFinishWithin, timeLimit + 5000); //5000 the first 5s of the game to see the cards before flip.
+
+      setIntervalCaller = setInterval(timerCountdownFunction, 1000);
+    }
   }
 
   //* ///////////// cardsNumber slicedImages shuffle //////////////////
@@ -449,7 +464,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
           playAgainButton.style.display = "block";
         }
         body.append(preventClicks);
-        overlay.animationDuration= "1.5s"; //! prevent clicks duration
+        overlay.animationDuration = "1.5s"; //! prevent clicks duration
 
         setTimeout(() => {
           body.removeChild(preventClicks);
