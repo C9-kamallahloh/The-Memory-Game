@@ -186,7 +186,7 @@ button {
   padding: 5px;
 }
 #hint-button {
-  display: flex; /* ! display: none -> flex for testing /////////// */
+  display: none; /* ! display: none skipped the idea for hint button /////////// */
   justify-content: center;
 }
 #start {

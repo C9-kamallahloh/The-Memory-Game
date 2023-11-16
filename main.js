@@ -30,7 +30,7 @@ Extra features:
 (DONE)  # shift the images to the center of the screen
 (DONE)  # local storage save progress 
         # Choose the time limit and show the timer.
-(button added, concept not yet) # Hint button and give hint after 3 mistakes. 
+(button added, (skipped)) # Hint button and give hint after 3 mistakes. 
         # image.div 100/6 100/5 100/4
 
 */
@@ -45,30 +45,30 @@ Bugs:
 */
 
 const images = [
-  { id: 1, src: "Media/01.jpg" , HTMLid: 1},
-  { id: 1, src: "Media/01.jpg" , HTMLid: 2},
-  { id: 2, src: "Media/02.jpg" , HTMLid: 3},
-  { id: 2, src: "Media/02.jpg" , HTMLid: 4},
-  { id: 3, src: "Media/03.jpg" , HTMLid: 5},
-  { id: 3, src: "Media/03.jpg" , HTMLid: 6},
-  { id: 4, src: "Media/04.jpg" , HTMLid: 7},
-  { id: 4, src: "Media/04.jpg" , HTMLid: 8},
-  { id: 5, src: "Media/05.jpg" , HTMLid: 9},
-  { id: 5, src: "Media/05.jpg" , HTMLid: 10},
-  { id: 6, src: "Media/06.jpg" , HTMLid: 11},
-  { id: 6, src: "Media/06.jpg" , HTMLid: 12},
-  { id: 7, src: "Media/07.jpg" , HTMLid: 13},
-  { id: 7, src: "Media/07.jpg" , HTMLid: 14},
-  { id: 8, src: "Media/08.jpg" , HTMLid: 15},
-  { id: 8, src: "Media/08.jpg" , HTMLid: 16},
-  { id: 9, src: "Media/09.jpg" , HTMLid: 17},
-  { id: 9, src: "Media/09.jpg" , HTMLid: 18},
-  { id: 10, src: "Media/10.jpg" , HTMLid: 19},
-  { id: 10, src: "Media/10.jpg" , HTMLid: 20},
-  { id: 11, src: "Media/11.jpg" , HTMLid: 21},
-  { id: 11, src: "Media/11.jpg" , HTMLid: 22},
-  { id: 12, src: "Media/12.jpg" , HTMLid: 23},
-  { id: 12, src: "Media/12.jpg" , HTMLid: 24},
+  { id: 1, src: "Media/01.jpg", HTMLid: 1 },
+  { id: 1, src: "Media/01.jpg", HTMLid: 2 },
+  { id: 2, src: "Media/02.jpg", HTMLid: 3 },
+  { id: 2, src: "Media/02.jpg", HTMLid: 4 },
+  { id: 3, src: "Media/03.jpg", HTMLid: 5 },
+  { id: 3, src: "Media/03.jpg", HTMLid: 6 },
+  { id: 4, src: "Media/04.jpg", HTMLid: 7 },
+  { id: 4, src: "Media/04.jpg", HTMLid: 8 },
+  { id: 5, src: "Media/05.jpg", HTMLid: 9 },
+  { id: 5, src: "Media/05.jpg", HTMLid: 10 },
+  { id: 6, src: "Media/06.jpg", HTMLid: 11 },
+  { id: 6, src: "Media/06.jpg", HTMLid: 12 },
+  { id: 7, src: "Media/07.jpg", HTMLid: 13 },
+  { id: 7, src: "Media/07.jpg", HTMLid: 14 },
+  { id: 8, src: "Media/08.jpg", HTMLid: 15 },
+  { id: 8, src: "Media/08.jpg", HTMLid: 16 },
+  { id: 9, src: "Media/09.jpg", HTMLid: 17 },
+  { id: 9, src: "Media/09.jpg", HTMLid: 18 },
+  { id: 10, src: "Media/10.jpg", HTMLid: 19 },
+  { id: 10, src: "Media/10.jpg", HTMLid: 20 },
+  { id: 11, src: "Media/11.jpg", HTMLid: 21 },
+  { id: 11, src: "Media/11.jpg", HTMLid: 22 },
+  { id: 12, src: "Media/12.jpg", HTMLid: 23 },
+  { id: 12, src: "Media/12.jpg", HTMLid: 24 },
 ];
 
 //
@@ -211,8 +211,8 @@ playAgainButton.addEventListener("click", (event) => {
   for (let i = 0; i < shuffledImages.length; i++) {
     const imageDiv = document.querySelector(".image-div");
     game.removeChild(imageDiv);
-  }
-  shuffledImages = shuffle(shuffledImages);
+  } // remove the old cards
+  shuffledImages = shuffle(shuffledImages); //re-shuffle the cards before play again.
   playTheGame(event, cardsNumber, wrongAttempts);
 });
 
@@ -268,28 +268,40 @@ const preventClicks = document.createElement("img");
 preventClicks.src = "Media/meraki-logo.jpg";
 preventClicks.id = "prevent-clicks";
 
-// ! /////////////// Hint button ////////////////////  working on it
+//* //////////////// Hint button (skipped) /////////////////////
 // // console.log(typeof overlay.id);
 // // let imageDivOriginalBoarder = imageDiv.style.border;
-// const hintFunction = () => {
+// const hintFunction = (shuffledImages, overlayIdArray, overlay) => {
 //   console.log("sssssssssss");
-//   imageDiv.style.border = "2px black solid";
 //   let randomHint = Math.floor((Math.random() * shuffledImages.length) / 2);
-//   if (Number(shuffledImages[randomHint].id) === randomHint) {
-//     imageDiv.style.border = "5px red solid";
+// // console.log('shuffledImages', shuffledImages)
+// // console.log('overlayIdArray', overlayIdArray)
+
+//   for (let i = 0; i < shuffledImages.length; i++) {
+//     let overlayFromHTMLId = Math.ceil(overlayIdArray[i] / 2);
+//     let object = shuffledImages[randomHint];
+
+//     // console.log('object', object)
+//     // console.log("overlayFromHTMLId", overlayFromHTMLId);
+//     // console.log(typeof object.id, object.id);
+//     // console.log(object.id === overlayFromHTMLId);
+
+//     if (object.id === overlayFromHTMLId) {
+//       // console.log(overlay);
+//       overlay.style.border = "5px red solid";
+//     }
 //   }
 // };
 // hintButton.addEventListener("click", hintFunction);
-
 
 //* /////////////// Music ////////////////////
 
 let musicVol = document.getElementById("music");
 musicVol.volume = 0.05; // to change the initial music volume level
-soundCorrect.volume = 0.01;
-soundWrong.volume = 0.01;
-soundWin.volume = 0.01;
-soundLose.volume = 0.01;
+soundCorrect.volume = 0.05;
+soundWrong.volume = 0.05;
+soundWin.volume = 0.05;
+soundLose.volume = 0.05;
 
 //* /////////////// Light & Dark theme ////////////////////
 
@@ -318,6 +330,119 @@ dark.addEventListener("click", darkFunction);
 const mustFinishWithin = () => {};
 setTimeout(mustFinishWithin, Number(timeSelect.value) + 5000); //5000 the first 5s of the game to see the cards before flip.
 // console.log((Number(timeSelect.value)+5000));
+
+//* ///////////////////////////////////////////////////////
+//* ///////////////////////////////////////////////////////
+//* ///////////////////// THE GAME ////////////////////////
+//* ///////////////////////////////////////////////////////
+//* ///////////////////////////////////////////////////////
+
+const theGame = (shuffledImages, wrongAttemptsInGame) => {
+  let userClick;
+  let firstImage;
+  let overlayIdArray = [];
+  // console.log("wrongAttemptsInGame ", wrongAttemptsInGame);
+  body.append(preventClicks);
+  setTimeout(() => {
+    body.removeChild(preventClicks);
+  }, 510); //! prevent clicks at the game start for number of seconds, you need to edit the animation duration when updating this.
+
+  for (let i = 0; i < shuffledImages.length; i++) {
+    const imageDiv = document.createElement("div");
+    imageDiv.className = "image-div";
+
+    const overlay = document.createElement("img");
+    overlay.id = shuffledImages[i].HTMLid;
+    overlayIdArray.push(overlay.id);
+    overlay.className = "overlay";
+    overlay.src = "Media/meraki-logo.jpg";
+    overlay.style.zIndex = 1;
+
+    const image = document.createElement("img");
+    image.src = shuffledImages[i].src;
+
+    overlay.addEventListener("click", (e) => {
+      soundCorrect.load();
+      soundWrong.load();
+      soundWin.load();
+      soundLose.load();
+
+      overlay.style.zIndex = -1;
+      if (userClick === undefined) {
+        firstImage = e.target; // overlay 1 tag
+        userClick = e.target.id; // overlay 1 ID
+      } else if (userClick !== e.target.id) {
+        wrongPairsCounter++;
+        numberOfMistakes.innerText = wrongPairsCounter;
+        console.log("Wrong:", wrongPairsCounter);
+        motivationalWrongRandom();
+        soundWrong.play();
+        //! display: none (skipped the idea of hint button) //////////
+        /*         if (wrongPairsCounter % 3 === 0) {
+          hintButton.style.display = "flex";
+        } else {
+          hintButton.style.display = "none";
+        } */
+
+        // console.log(wrongPairsCounter == wrongAttemptsInGame);
+        // console.log(typeof wrongAttemptsInGame);
+        // console.log(typeof wrongPairsCounter);
+        if (wrongPairsCounter === wrongAttemptsInGame) {
+          console.log("LOST");
+          loses++;
+          soundLose.play();
+          localStorage.setItem("loses", loses);
+          winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
+          wrongPairsCounter = 0;
+          numberOfMistakes.innerText = 0;
+          correctPairsCounter = 0;
+          bodyWelcome.style.display = "block";
+          bodyGame.style.display = "none";
+          gameClass.style.display = "none";
+          logoPhoto.src = "Media/you-lose.jpg";
+          logoText.innerText = motivationalTryAgainRandom();
+          playAgainButton.style.display = "block";
+        }
+        body.append(preventClicks);
+        setTimeout(() => {
+          body.removeChild(preventClicks);
+          overlay.style.zIndex = 1;
+          firstImage.style.zIndex = 1;
+          userClick = undefined;
+          firstImage = undefined;
+        }, 500);
+      } else if (userClick === e.target.id) {
+        correctPairsCounter++;
+        console.log("Correct:", correctPairsCounter);
+        motivationalCorrectRandom();
+        soundCorrect.play();
+        userClick = undefined;
+        firstImage = undefined;
+        if (correctPairsCounter === cardsNumber / 2) {
+          console.log("WON");
+          wins++;
+          soundWin.play();
+          localStorage.setItem("wins", wins);
+          winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
+          wrongPairsCounter = 0;
+          numberOfMistakes.innerText = 0;
+          correctPairsCounter = 0;
+          bodyWelcome.style.display = "block";
+          bodyGame.style.display = "none";
+          gameClass.style.display = "none";
+          logoPhoto.src = "Media/you-win.jpg";
+          logoText.innerText = motivationalCongratsRandom();
+          playAgainButton.style.display = "block";
+        }
+      }
+    });
+    imageDiv.append(image, overlay);
+    game.append(imageDiv);
+    hintButton.addEventListener("click", (e) => {
+      hintFunction(shuffledImages, overlayIdArray, overlay);
+    });
+  }
+};
 
 //* /////////////// motivation ////////////////////
 
@@ -483,112 +608,4 @@ const motivationalTryAgain = [
 const motivationalTryAgainRandom = () => {
   const randomIndex = Math.floor(Math.random() * motivationalTryAgain.length);
   return motivationalTryAgain[randomIndex].quote;
-};
-
-//* ///////////////////////////////////////////////////////
-//* ///////////////////////////////////////////////////////
-//* ///////////////////// THE GAME ////////////////////////
-//* ///////////////////////////////////////////////////////
-//* ///////////////////////////////////////////////////////
-
-const theGame = (shuffledImages, wrongAttemptsInGame) => {
-  let userClick;
-  let firstImage;
-  // console.log("wrongAttemptsInGame ", wrongAttemptsInGame);
-  body.append(preventClicks);
-  setTimeout(() => {
-    body.removeChild(preventClicks);
-  }, 510); //! prevent clicks at the game start for number of seconds, you need to edit the animation duration when updating this.
-
-  for (let i = 0; i < shuffledImages.length; i++) {
-    const imageDiv = document.createElement("div");
-    imageDiv.className = "image-div";
-
-    const overlay = document.createElement("img");
-    overlay.id = shuffledImages[i].id;
-    overlay.className = "overlay";
-    overlay.src = "Media/meraki-logo.jpg";
-    overlay.style.zIndex = 1;
-
-    const image = document.createElement("img");
-    image.src = shuffledImages[i].src;
-
-    overlay.addEventListener("click", (e) => {
-      soundCorrect.load();
-      soundWrong.load();
-      soundWin.load();
-      soundLose.load();
-
-      overlay.style.zIndex = -1;
-      if (userClick === undefined) {
-        firstImage = e.target; // overlay 1 tag
-        userClick = e.target.id; // overlay 1 ID
-      } else if (userClick !== e.target.id) {
-        wrongPairsCounter++;
-        numberOfMistakes.innerText = wrongPairsCounter;
-        console.log("Wrong:", wrongPairsCounter);
-        motivationalWrongRandom();
-        soundWrong.play();
-        //! display: flex for testing //////////
-        /*         if (wrongPairsCounter % 3 === 0) {
-          hintButton.style.display = "flex";
-        } else {
-          hintButton.style.display = "none";
-        } */
-
-        // console.log(wrongPairsCounter == wrongAttemptsInGame);
-        // console.log(typeof wrongAttemptsInGame);
-        // console.log(typeof wrongPairsCounter);
-        if (wrongPairsCounter === wrongAttemptsInGame) {
-          console.log("LOST");
-          loses++;
-          soundLose.play();
-          localStorage.setItem("loses", loses);
-          winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
-          wrongPairsCounter = 0;
-          numberOfMistakes.innerText = 0;
-          correctPairsCounter = 0;
-          bodyWelcome.style.display = "block";
-          bodyGame.style.display = "none";
-          gameClass.style.display = "none";
-          logoPhoto.src = "Media/you-lose.jpg";
-          logoText.innerText = motivationalTryAgainRandom();
-          playAgainButton.style.display = "block";
-        }
-        body.append(preventClicks);
-        setTimeout(() => {
-          body.removeChild(preventClicks);
-          overlay.style.zIndex = 1;
-          firstImage.style.zIndex = 1;
-          userClick = undefined;
-          firstImage = undefined;
-        }, 500);
-      } else if (userClick === e.target.id) {
-        correctPairsCounter++;
-        console.log("Correct:", correctPairsCounter);
-        motivationalCorrectRandom();
-        soundCorrect.play();
-        userClick = undefined;
-        firstImage = undefined;
-        if (correctPairsCounter === cardsNumber / 2) {
-          console.log("WON");
-          wins++;
-          soundWin.play();
-          localStorage.setItem("wins", wins);
-          winLose.innerText = `[ Wins = ${wins} , Loses = ${loses} ]`;
-          wrongPairsCounter = 0;
-          numberOfMistakes.innerText = 0;
-          correctPairsCounter = 0;
-          bodyWelcome.style.display = "block";
-          bodyGame.style.display = "none";
-          gameClass.style.display = "none";
-          logoPhoto.src = "Media/you-win.jpg";
-          logoText.innerText = motivationalCongratsRandom();
-          playAgainButton.style.display = "block";
-        }
-      }
-    });
-    imageDiv.append(image, overlay);
-    game.append(imageDiv);
-  }
 };
