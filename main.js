@@ -115,6 +115,11 @@ const numberOfMistakesDiv = document.querySelector(".number-of-mistakes");
 const numberOfMistakes = document.querySelector("#number-of-mistakes");
 const wrongAttemptsCounter = document.querySelector("#wrong-attempts-counter");
 const music = document.querySelector("#music");
+const musicPlayButton = document.querySelector("#music-play-button");
+const musicMuteButton = document.querySelector("#music-mute-button");
+const soundsPlayButton = document.querySelector("#sound-effects-play-button");
+const soundsMuteButton = document.querySelector("#sound-effects-mute-button");
+
 const soundCorrect = document.querySelector("#sound-correct");
 const soundWrong = document.querySelector("#sound-wrong");
 const soundWin = document.querySelector("#sound-win");
@@ -171,10 +176,10 @@ difficultySelect.addEventListener("change", (e) => {
 timeSelect.addEventListener("change", (e) => {
   timeLimit = Number(e.target.value);
   if (timeLimit > 0) {
-    timerValue.innerText = `${Math.floor(timeLimit / 1000 / 60)} min`;
+    timerValue.innerText = ` ${Math.floor(timeLimit / 1000 / 60)} min`;
     // console.log("true",timerValue.innerText);
   } else {
-    timerValue.innerText = `Unlimited time`;
+    timerValue.innerText = ` Unlimited time`;
     // console.log("false",timerValue.innerText);
   }
 }); //! /////////////////////////////////////////
@@ -206,8 +211,7 @@ const shuffle = (array) => {
 // const timerValue = document.querySelector("#timer-value");
 // const timerCountdown = document.querySelector("#timer-countdown");
 
-// timerValue.innerText = `${timeLimit / 1000} sec`;
-timerValue.innerText = `${Math.floor(timeLimit / 1000 / 60)} min`;
+timerValue.innerText = ` ${Math.floor(timeLimit / 1000 / 60)} min`;
 
 const mustFinishWithin = () => {
   //same as reset button
@@ -231,7 +235,7 @@ const mustFinishWithin = () => {
 
 let countdownInitialValue = 0;
 const timerCountdownFunction = () => {
-  timerCountdown.innerText = `${Math.floor(
+  timerCountdown.innerText = ` ${Math.floor(
     countdownInitialValue / 1000 / 60
   )} min : ${(countdownInitialValue / 1000) % 60} sec.`;
 
@@ -250,12 +254,10 @@ const playTheGame = (event, cardsNumber, wrongAttempts) => {
     playNowButton.style.display = "none";
     playAgainButton.style.display = "none";
     motivation.innerText = "Good Luck";
-    // overlay.animationDuration= "5s";
     countdownInitialValue = timeLimit + 5000; //! edit css overlay.animationDuration with this.
     clearTimeout(setTimeoutCaller);
     clearInterval(setIntervalCaller);
-    timerValue.innerText = "Unlimited time.";
-    timerCountdown.innerHTML = "Unlimited time.";
+    timerCountdown.innerHTML = " Unlimited time.";
     if (timeLimit > 0) {
       setTimeoutCaller = setTimeout(mustFinishWithin, timeLimit + 5000); //5000 the first 5s of the game to see the cards before flip.
 
@@ -366,11 +368,51 @@ preventClicks.id = "prevent-clicks";
 //* /////////////// Music ////////////////////
 
 let musicVol = document.getElementById("music");
-musicVol.volume = 0.05; // to change the initial music volume level
-soundCorrect.volume = 0.05;
-soundWrong.volume = 0.05;
-soundWin.volume = 0.05;
-soundLose.volume = 0.05;
+musicVol.volume = 0.5; // to change the initial music volume level
+soundCorrect.volume = 0.5;
+soundWrong.volume = 0.5;
+soundWin.volume = 0.5;
+soundLose.volume = 0.5;
+
+musicPlayButton.style.display = "none";
+
+const muteFunction = () => {
+  musicPlayButton.style.display = "block";
+  musicMuteButton.style.display = "none";
+  musicVol.volume = 0;
+};
+const playFunction = () => {
+  musicPlayButton.style.display = "none";
+  musicMuteButton.style.display = "block";
+  musicVol.volume = 0.5;
+};
+
+musicMuteButton.addEventListener("click", muteFunction);
+musicPlayButton.addEventListener("click", playFunction);
+
+soundsPlayButton.style.display = "none";
+
+const soundsMuteFunction = () => {
+  soundsPlayButton.style.display = "block";
+  soundsMuteButton.style.display = "none";
+
+  soundCorrect.volume = 0;
+  soundWrong.volume = 0;
+  soundWin.volume = 0;
+  soundLose.volume = 0;
+};
+const soundsPlayFunction = () => {
+  soundsPlayButton.style.display = "none";
+  soundsMuteButton.style.display = "block";
+
+  soundCorrect.volume = 0.5;
+  soundWrong.volume = 0.5;
+  soundWin.volume = 0.5;
+  soundLose.volume = 0.5;
+};
+
+soundsMuteButton.addEventListener("click", soundsMuteFunction);
+soundsPlayButton.addEventListener("click", soundsPlayFunction);
 
 //* /////////////// Light & Dark theme ////////////////////
 
@@ -405,7 +447,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
   body.append(preventClicks);
   setTimeout(() => {
     body.removeChild(preventClicks);
-  }, 5010); //! prevent clicks at the game start for number of seconds, you need to edit the animation duration when updating this.
+  }, 510); //! 5010 prevent clicks at the game start for number of seconds, you need to edit the animation duration when updating this.
 
   for (let i = 0; i < shuffledImages.length; i++) {
     const imageDiv = document.createElement("div");
@@ -465,7 +507,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
           playAgainButton.style.display = "block";
         }
         body.append(preventClicks);
-        overlay.animationDuration = "1.5s"; //! prevent clicks duration
+        overlay.animationDuration = "0.5s"; //! 1500 prevent clicks duration
 
         setTimeout(() => {
           body.removeChild(preventClicks);
@@ -473,7 +515,7 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
           firstImage.style.zIndex = 1;
           userClick = undefined;
           firstImage = undefined;
-        }, 1500); //! prevent clicks when wrong for number of seconds, you need to edit the animation duration when updating this.
+        }, 500); //! 1500 prevent clicks when wrong for number of seconds, you need to edit the animation duration when updating this.
       } else if (userClick === Number(Math.ceil(e.target.id / 2))) {
         correctPairsCounter++;
         console.log("Correct:", correctPairsCounter);
@@ -507,9 +549,8 @@ const theGame = (shuffledImages, wrongAttemptsInGame) => {
     });
   }
 
+  //! (skipped) imageDivClass.style.width
 
-  //! (skipped) imageDivClass.style.width 
-  
   // for (let i = 0; i < shuffledImages.length; i++) {
   // const imageDivClass = document.querySelector(".image-div");
   //   // console.log(imageDivClass);

@@ -3,13 +3,22 @@
   padding: 0;
   box-sizing: border-box;
 }
+html {
+  margin: 0px;
+  height: 100%;
+  max-width: 100%;
+}
 body {
-  margin: 15px;
-  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0px;
+  padding: 15px;
+  min-height: 98%;
+  width: 100%;
   position: relative;
   background-color: rgb(250, 250, 250);
   color: rgb(65, 65, 65);
-  /* height:720px; */
 }
 
 #body-welcome {
@@ -21,46 +30,62 @@ body {
 #test {
   color: red;
 }
+.header-footer {
+  max-height: 15%;
+  min-height: 5%;
+}
 #header {
-  display: grid;
+  display: flex;
+  gap: 2%;
+  flex-wrap:wrap;
+  justify-content:space-between ;
+  align-items: center;
+/*   display: grid;
   grid-template: 1fr / 1fr 3fr 1fr;
-  gap: 10px;
+  gap: 2%; */
 }
 #header-left {
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
-  justify-content: left;
+  /* justify-content: left; */
+  max-width: 20%;
 }
 #header-center {
-  display: flex;
-  justify-content: center;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* text-align: center; */
 }
 #header-right {
-  display: flex;
-  justify-content: right;
+  /* display: flex; */
+  /* justify-content: right; */
+  max-width: 20%;
 }
 #main-welcome {
+  min-height: 100%;
   display: grid;
-  grid-template: 2fr 1fr / 2fr 1fr 1fr 1fr;
+  grid-template: 3fr 1fr / 1fr 1fr 1fr 1fr;
 }
 #logo {
   grid-area: 1 / 1 / 3 / 2;
-  display: flex;
+  display: grid;
+  grid-template-rows: 1fr;
+  padding: 4%;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 #logo img {
-  margin: 20px;
-  max-width: 200px;
-  max-height: 200px;
+  margin: 2%;
+  max-width: 100%;
+  max-height: 100%;
   align-self: center;
 }
 .welcome-text {
   grid-area: 1 / 2 / 2 / 5;
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  justify-content: center;
+  margin: 0% 5%;
 }
 .choices {
   display: flex;
@@ -74,25 +99,37 @@ body {
 }
 #number {
   grid-area: 2 / 2 / 3 / 3;
-  margin: 0px 20px;
+  margin: 0px 12%;
 }
 #difficulty {
   grid-area: 2 / 3 / 3 / 4;
-  margin-right: 20px;
+  margin-right: 12%;
 }
 #time {
   grid-area: 2 / 4 / 3 / 5;
-  margin-right: 20px;
+  margin-right: 12%;
 }
 #main-index {
   display: grid;
-  grid-template: 1fr 1fr / 1fr 3fr 1fr;
+  grid-template: 1fr 1fr / 1fr 4fr 1fr;
 }
 #timer {
   grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  justify-content: left;
+  align-self:baseline;
+  flex-wrap: wrap;
+  margin: 10% 5%;
+  gap: 5%;
+  line-height: 200%;
 }
 #motivation {
   grid-area: 2 / 1 / 3 / 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 5%;
 }
 #game {
   grid-area: 1 / 2 / 3 / 3;
@@ -123,11 +160,10 @@ body {
 }*/
 .image-div {
   display: flex;
-  width: 15.66667%; /* 100/6 = 16.67-1%gap images per line related to flex game div*/
+  width: 15.16667%; /* 100/6 = 16.67 -1% * 1.5 gap images per line related to flex game div*/
   /* height: 100%; */
   position: relative;
   border: 2px solid black;
-
 }
 .overlay {
   position: absolute;
@@ -135,7 +171,7 @@ body {
   top: 0;
   /*   opacity: 0.75; */
   animation-name: apply-overlay;
-  animation-duration: 5s; /*! edit main.js playTheGame overlay.animationDuration with this. */
+  animation-duration: 0.5s; /*! edit main.js prevent click -> playTheGame overlay.animationDuration with this. */
   animation-fill-mode: forwards;
 }
 @keyframes apply-overlay {
@@ -176,14 +212,23 @@ body {
   grid-area: 1 / 3 / 2 / 4;
   display: flex;
   flex-direction: column;
-  margin: 15px;
+  flex-wrap: wrap;
+  margin-top: 10%;
 }
 .number-of-mistakes {
-  border: 1px black solid;
+  display: flex;
+  flex-wrap: wrap;
+  /* border: 1px black solid; */
   text-align: center;
+  gap: 3%;
+  padding: 5%;
 }
 button {
   padding: 5px;
+  min-width:max-content;
+  width: 100px;
+  min-height: max-content;
+height: 35px;
 }
 #hint-button {
   display: none; /* ! display: none skipped the idea for hint button /////////// */
@@ -195,6 +240,24 @@ button {
 #footer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 #music {
+}
+
+@media (min-width: 1201px) {
+
+}
+@media (min-width: 1025px) and (max-width: 1200px) {
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+}
+@media (min-width: 481px) and (max-width: 768px) {
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  
+}
+
+@media (orientation: landscape) {
 }

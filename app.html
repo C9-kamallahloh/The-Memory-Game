@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body id="body">
-    <header id="header">
+    <header id="header" class="header-footer">
       <div id="header-left">
         <h4>
-          MERAKI_Academy_Project_1 <br />
+          MERAKI_Academy Project_1 <br />
           B06_Kamal Lahloh
         </h4>
       </div>
@@ -30,13 +30,11 @@
     <div id="body-welcome">
       <main id="main-welcome">
         <div id="logo">
-          <!-- class="welcome-class" -->
           <p id="win-lose"></p>
           <img id="logo-photo" src="Media/meraki-logo.jpg" alt="logo" />
           <p id="logo-text"></p>
         </div>
         <div class="welcome-text">
-          <!-- class="welcome-class" -->
           <h4>Welcome to The Memory Game</h4>
           <br />
           How to Play: <br />
@@ -49,7 +47,7 @@
           what you chooses. And the time limit to finish the game within.
         </div>
         <div id="number" class="number choices">
-          <label for="number">number of cards:</label>
+          <label for="number">Number of cards:</label>
           <select id="number-select" name="number" class="number select">
             <option value="24">24 Cards</option>
             <option value="22">22 Cards</option>
@@ -86,16 +84,16 @@
         </div>
       </main>
     </div>
-
+ 
     <!-- ------------------------------------------------------------ -->
 
     <div id="body-game">
       <main id="main-index">
         <div id="timer">
-          <br>
+          
           Time limit = 
           <p id="timer-value"></p>
-          <br>
+          
           Countdown = 
           <p id="timer-countdown"></p>
         </div>
@@ -121,13 +119,17 @@
     <!-- ------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------ -->
 
-    <footer id="footer">
+    <footer id="footer" class="header-footer">
       <div>
-        <audio id="music" loop autoplay muted controls>
-          <!-- loop autoplay muted -->
+        <audio id="music" loop autoplay>
+          <!-- loop autoplay muted controls -->
           <source src="Media/Canon in D - Pachelbel.mp3" type="audio/mpeg" />
           <a href="Media/Canon in D - Pachelbel.mp3"> Download audio </a>
         </audio>
+        <button id="music-play-button">Play Music</button>
+        <button id="music-mute-button">Mute Music</button>
+        <button id="sound-effects-play-button">SFX ON</button>
+        <button id="sound-effects-mute-button">SFX OFF</button>
         <audio id="sound-correct">
           <source src="Media/sound-correct.wav" type="audio/wav" />
         </audio>
